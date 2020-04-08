@@ -20,7 +20,7 @@
                         {% for livre in liste_livres %}
                             <p>Réf. {{ livre.id }}</p>
                             <p>Titre {{ livre.titre }}</p>
-                            <p>{{ liste.auteur|upper }}</p>
+                            <p>{{ livre.auteur|upper }}</p>
                         {% endfor %}
                     </div>
                 </div>
