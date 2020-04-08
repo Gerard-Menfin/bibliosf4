@@ -3,10 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags("app") }}
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% include "menu.html.twig" %}
+        <div class="container">
+            {% block body %}
+                <h1>Bienvenue à la bibliothèque</h1>
+
+                <div class="row">
+                    <h2>Liste des livres : {{ liste_livres|length }}</h2>
+                    <div>
+                        {# EXO : afficher la liste des livres #}
+                        {% for livre in liste_livres %}
+                            <p>Réf. {{ livre.id }}</p>
+                            <p>Titre {{ livre.titre }}</p>
+                            <p>{{ liste.auteur|upper }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags("app") }}
+        {% endblock %}
     </body>
 </html>
