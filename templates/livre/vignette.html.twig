@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ livre.titre }}</h4>
+    <p class="card-text">{{ livre.auteur }}</p>
+    <a href="{{ path("livre_show", { id: livre.id}) }}" class="card-link">
+        <i class="fa fa-book"></i>
+    </a>
+  </div>
+</div>

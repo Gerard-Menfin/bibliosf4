@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}Exercices !{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div>
+        <h2>Liste des livres empruntés par Chloé</h2>
+        <p>
+        {% for emprunt in liste_chloe %}
+            {{ emprunt.livre.titre ~ ", " }}
+        {% endfor %}
+        </p>
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <form>
+        <div class="form-group">
+            <label>Prénom de l'abonné : </label>
+            <input type="text" name="prenom" class="form-control">
+        </div>
+        <button class="btn btn-primary">Envoyer</button>
+    </form>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/biblio/src/Controller/AccueilController.php'|file_link(0) }}">src/Controller/AccueilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/biblio/templates/accueil/index.html.twig'|file_link(0) }}">templates/accueil/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% if liste_livres_empruntes_par|length > 0 %}
+    
+        <h2>Liste des livres empruntés par {{ prenom }} :</h2>
+        <div class="card-columns">
+        {% for emprunt in liste_livres_empruntes_par %}
+            {% include "livre/vignette.html.twig" with { "livre": emprunt.livre } %}
+        {% endfor %}
+        </div>
+    {% else %}
+        <p class="alert alert-warning">Cet abonné n'existe pas ou n'a jamais emprunté de livres</p>
+    {% endif %}
+
 {% endblock %}

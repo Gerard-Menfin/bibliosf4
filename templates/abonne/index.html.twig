@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Abonne index{% endblock %}
+{% block title %}Abonnés{% endblock %}
 
 {% block body %}
-    <h1>Abonne index</h1>
+    <h1>Liste des abonnées : {{ abonnes|length }} abonnés</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Prenom</th>
-                <th>Roles</th>
-                <th>Password</th>
+                <th>Prénom</th>
+                <th>Rôles</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,7 +20,6 @@
                 <td>{{ abonne.id }}</td>
                 <td>{{ abonne.prenom }}</td>
                 <td>{{ abonne.roles ? abonne.roles|json_encode : '' }}</td>
-                <td>{{ abonne.password }}</td>
                 <td>
                     <a href="{{ path('abonne_show', {'id': abonne.id}) }}">show</a>
                     <a href="{{ path('abonne_edit', {'id': abonne.id}) }}">edit</a>

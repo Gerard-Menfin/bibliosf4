@@ -19,6 +19,41 @@ class EmpruntRepository extends ServiceEntityRepository
         parent::__construct($registry, Emprunt::class);
     }
 
+    public function findChloe()
+    {
+        return $this->createQueryBuilder('e')
+            ->join("e.abonne", "a")
+            ->where('a.prenom = :val')
+            ->setParameter('val', "Chloe")
+            ->orderBy('e.date_sortie', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findLivresEmpruntesPar($prenom)
+    {
+        return $this->createQueryBuilder('e')
+            ->join("e.abonne", "a")
+            ->where('a.prenom = :val')
+            ->setParameter('val', $prenom)
+            ->orderBy('e.date_sortie', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByNonRendus()
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date_rendu IS NULL')
+            ->orderBy('e.date_sortie', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     // /**
     //  * @return Emprunt[] Returns an array of Emprunt objects
     //  */

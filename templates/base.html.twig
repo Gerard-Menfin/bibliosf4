@@ -8,19 +8,19 @@
         {% endblock %}
     </head>
     <body>
-        {% include "menu.html.twig" %}
+        {% block nav %}
+            {% include "menu.html.twig" %}
+        {% endblock %}
+
         <div class="container">
             {% block body %}
                 <h1>Bienvenue à la bibliothèque</h1>
-
-                <div class="row">
+                <div>
                     <h2>Liste des livres : {{ liste_livres|length }}</h2>
-                    <div>
+                    <div class="card-columns">
                         {# EXO : afficher la liste des livres #}
                         {% for livre in liste_livres %}
-                            <p>Réf. {{ livre.id }}</p>
-                            <p>Titre {{ livre.titre }}</p>
-                            <p>{{ livre.auteur|upper }}</p>
+                            {% include "livre/vignette.html.twig" with { "livre": livre } %}
                         {% endfor %}
                     </div>
                 </div>
