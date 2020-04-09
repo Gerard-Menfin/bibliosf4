@@ -19,6 +19,20 @@ class EmpruntRepository extends ServiceEntityRepository
         parent::__construct($registry, Emprunt::class);
     }
 
+    /**
+     * Retourne la liste des emprunts concernant les livres de l'auteur passé en paramètre
+     */
+    public function findEmpruntsParAuteur($auteur){
+        return $this->createQueryBuilder('e')
+            ->join("e.livre", "l")
+            ->where('l.auteur = :val')
+            ->setParameter('val', $auteur)
+            ->orderBy('e.date_sortie', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findChloe()
     {
         return $this->createQueryBuilder('e')

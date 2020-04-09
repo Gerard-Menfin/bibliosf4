@@ -17,12 +17,17 @@
                 <h1>Bienvenue à la bibliothèque</h1>
                 <div>
                     <h2>Liste des livres : {{ liste_livres|length }}</h2>
-                    <div class="card-columns">
-                        {# EXO : afficher la liste des livres #}
-                        {% for livre in liste_livres %}
-                            {% include "livre/vignette.html.twig" with { "livre": livre } %}
-                        {% endfor %}
-                    </div>
+                    {% if liste_livres|length %}                        
+                        <div class="card-columns">
+                            {# EXO : afficher la liste des livres #}
+                            {% for livre in liste_livres %}
+                                {% include "livre/vignette.html.twig" with { "livre": livre } %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">Aucun livre, ni auteur, ne correspond à votre recherche</div>
+                    {% endif %}
+                            
                 </div>
             {% endblock %}
         </div>

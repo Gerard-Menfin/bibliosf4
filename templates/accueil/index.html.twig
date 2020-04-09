@@ -3,6 +3,12 @@
 {% block title %}Exercices !{% endblock %}
 
 {% block body %}
+    <h2>Liste des abonnés qui ont empruntés un livre d'Alphonse Daudet</h2>
+    {% for emprunt in emprunts_livres_alphonse_daudet %}
+        <p>Abonné : {{ emprunt.abonne.prenom }} - Livre : {{ emprunt.livre.titre }}</p>
+    {% endfor %}
+
+    <hr>
     <div>
         <h2>Liste des livres empruntés par Chloé</h2>
         <p>

@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Profil abonné{% endblock %}
+
+{% block body %}
+    {# 
+        1. Afficher les informations de l'abonné 
+        2. afficher la liste des emprunts de l'abonné
+                livre, date_sortie, date_rendu
+        3. Vous devez créer une route pour afficher le profil
+        4. cette route ne doit être accessible qu'à un utilisateur connecté
+    #}
+
+    <h1>Profil</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Prénom : {{ app.user.username }}</h4>
+  </div>
+</div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Livre</th>
+                <th>Emprunté le</th>
+                <th>Rendu le</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emprunt in app.user.emprunts %}
+            <tr>
+                <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
+                <td>{{ emprunt.dateSortie ? emprunt.dateSortie|date('d/m/Y') : '' }}</td>
+                <td>{{ emprunt.dateRendu ? emprunt.dateRendu|date('d/m/Y') : 'à rendre' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Vous n'avez emprunté aucun livre</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
