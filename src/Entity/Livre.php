@@ -33,6 +33,11 @@ class Livre
      */
     private $emprunts;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $couverture;
+
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
@@ -94,6 +99,18 @@ class Livre
                 $emprunt->setLivre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCouverture(): ?string
+    {
+        return $this->couverture;
+    }
+
+    public function setCouverture(?string $couverture): self
+    {
+        $this->couverture = $couverture;
 
         return $this;
     }

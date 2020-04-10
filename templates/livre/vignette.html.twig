@@ -1,9 +1,21 @@
 <div class="card">
+  {% if livre.couverture is not null %}
+    <img class="car-img-top" src="{{ asset(url_images ~ livre.couverture) }}">
+  {% endif %}
+  
   <div class="card-body">
     <h4 class="card-title">{{ livre.titre }}</h4>
     <p class="card-text">{{ livre.auteur }}</p>
-    <a href="{{ path("livre_show", { id: livre.id}) }}" class="card-link">
-        <i class="fa fa-book"></i>
-    </a>
+    {% if is_granted("ROLE_ADMIN") %}
+      <a href="{{ path("livre_show", { id: livre.id}) }}" class="card-link">
+          <i class="fa fa-book"></i>
+      </a>
+    {% else %}
+      <a href="{{ path("livre_afficher", { id: livre.id}) }}" class="card-link">
+          <i class="fa fa-book"></i>
+      </a>
+      
+    {% endif %}
+    
   </div>
 </div>

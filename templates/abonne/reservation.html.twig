@@ -3,13 +3,16 @@
 {% block title %}Réservation{% endblock %}
 
 {% block body %}
-    <form>
+    <form method="POST">
         <div class="form-group">
-            <label for=""></label>
-            <select multiple class="form-control" name="">
-                <option value=""></option>
+            <label for="">Livres disponibles</label>
+            <select multiple class="form-control" name="livres[]" required>
+                {% for livre in livresRendus %}
+                    <option value="{{ livre.id }}">{{ livre.titre ~ " - " ~ livre.auteur }}</option>                    
+                {% endfor %}
             </select>
         </div>
 
+        <button type="submit" class="btn btn-primary">Emprunter</button>
     </form>
 {% endblock %}

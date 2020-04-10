@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface as EntityManager;
 
 /**
  * @Route("/livre")
@@ -94,4 +95,26 @@ class LivreController extends AbstractController
 
         return $this->redirectToRoute('livre_index');
     }
+
+    /**
+     * @Route("s/{id}", name="livre_afficher", methods={"GET"})
+     */
+    public function afficher(Livre $livre): Response
+    {
+        return $this->render('livre/show.html.twig', [
+            'livre' => $livre,
+        ]);
+    }
+
+    /**
+     * @Route("test/{id}", name="prev", methods={"GET"})
+     */
+    public function testprev(Livre $livre): Response
+    {
+        return $this->render('livre/show.html.twig', [
+            'livre' => $livre,
+        ]);
+    }
+
+
 }

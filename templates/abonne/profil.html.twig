@@ -13,11 +13,19 @@
 
     <h1>Profil</h1>
 
-<div class="card">
-  <div class="card-body">
-    <h4 class="card-title">Prénom : {{ app.user.username }}</h4>
-  </div>
-</div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Prénom : {{ app.user.username }}</h4>
+        </div>
+    </div>
+
+    <div>
+        <a href="{{ path("reserver") }}">Emprunter des livres</a>
+        <a href="{{ path("livre_ajouter") }}">
+            <i class="fa fa-plus"></i>
+            Ajouter un livre
+        </a>
+    </div>
 
     <table class="table">
         <thead class="thead-dark">

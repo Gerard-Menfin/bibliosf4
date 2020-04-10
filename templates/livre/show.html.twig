@@ -22,9 +22,16 @@
         </tbody>
     </table>
 
-    <a href="{{ path('livre_index') }}">back to list</a>
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('livre_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
+        <a href="{{ path('livre_edit', {'id': livre.id}) }}">Modifier</a>
 
-    {{ include('livre/_delete_form.html.twig') }}
+        {{ include('livre/_delete_form.html.twig') }}
+    {% else %}
+        <a href="{{ path('accueil') }}">
+            <i class="fa fa-home"></i>
+            Retour à l'accueil
+        </a>
+    {% endif %}
 {% endblock %}
