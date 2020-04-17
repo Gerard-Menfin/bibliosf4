@@ -53,7 +53,7 @@ class LivreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="livre_show", methods={"GET"})
+     * @Route("/{id}", name="livre_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Livre $livre): Response
     {
@@ -83,7 +83,7 @@ class LivreController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="livre_delete", methods={"DELETE"})
+     * @Route("/{id}", name="livre_delete", methods={"DELETE"}, requirements={"id"="\d+"})
      */
     public function delete(Request $request, Livre $livre): Response
     {
@@ -105,16 +105,5 @@ class LivreController extends AbstractController
             'livre' => $livre,
         ]);
     }
-
-    /**
-     * @Route("test/{id}", name="prev", methods={"GET"})
-     */
-    public function testprev(Livre $livre): Response
-    {
-        return $this->render('livre/show.html.twig', [
-            'livre' => $livre,
-        ]);
-    }
-
 
 }

@@ -57,7 +57,7 @@ class AbonneController extends AbstractController
     }
 
     /**
-     * @Route("/abonne/{id}", name="abonne_show", methods={"GET"})
+     * @Route("/abonne/{id}", name="abonne_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Abonne $abonne): Response
     {
@@ -67,7 +67,7 @@ class AbonneController extends AbstractController
     }
 
     /**
-     * @Route("/abonne/{id}/modifier", name="abonne_edit", methods={"GET","POST"})
+     * @Route("/abonne/{id}/modifier", name="abonne_edit", methods={"GET","POST"}, requirements={"id"="\d+"})
      */
     public function edit(Request $request, Abonne $abonne): Response
     {
@@ -87,7 +87,7 @@ class AbonneController extends AbstractController
     }
 
     /**
-     * @Route("/abonne/{id}", name="abonne_delete", methods={"DELETE"})
+     * @Route("/abonne/{id}", name="abonne_delete", methods={"DELETE"}, requirements={"id"="\d+"})
      */
     public function delete(Request $request, Abonne $abonne): Response
     {

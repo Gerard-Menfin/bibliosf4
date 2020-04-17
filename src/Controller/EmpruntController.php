@@ -49,7 +49,7 @@ class EmpruntController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="emprunt_show", methods={"GET"})
+     * @Route("/{id}", name="emprunt_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Emprunt $emprunt): Response
     {
@@ -59,7 +59,7 @@ class EmpruntController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/modifier", name="emprunt_edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier", name="emprunt_edit", methods={"GET","POST"}, requirements={"id"="\d+"})
      */
     public function edit(Request $request, Emprunt $emprunt): Response
     {
@@ -79,7 +79,7 @@ class EmpruntController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="emprunt_delete", methods={"DELETE"})
+     * @Route("/{id}", name="emprunt_delete", methods={"DELETE"}, requirements={"id"="\d+"})
      */
     public function delete(Request $request, Emprunt $emprunt): Response
     {
