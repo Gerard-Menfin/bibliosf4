@@ -19,7 +19,7 @@
         "@fortawesome/fontawesome-free": "^5.13.0",
         "acorn": "6.4.1",
         "bootstrap": "^4.4.1",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "minimist": "1.2.3",
         "popper.js": "^1.16.1"
     }
