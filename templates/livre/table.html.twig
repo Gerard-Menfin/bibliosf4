@@ -1,0 +1,55 @@
+<table class="table {{ table_class is not null ? table_class : "" }}">
+    <thead class="thead-dark">
+        {% if table_titre is not null %}
+            <tr>
+                <th colspan="100%">
+                    <div class="d-flex justify-content-between">
+                        <div>{{ table_titre }}</div>
+                        <a href="{{ path('livre_new') }}" class="mr-3"> 
+                            <i class="fa fa-plus-square"></i>
+                            Ajouter
+                        </a>
+                    </div>
+                </th>
+            </tr>            
+        {% endif %}
+        <tr class="centrer">
+            <th>Id</th>
+            <th>Couverture</th>
+            <th>Auteur</th>
+            <th>Titre</th>
+            <th>Disponible</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for livre in livres %}
+        <tr>
+            <td>{{ livre.id }}</td>
+            <td>{{ livre.couverture|img("livres", "mini")|raw }}</td>
+            <td>{{ livre.auteur }}</td>
+            <td>{{ livre.titre }}</td>
+            <td>
+            {% if livre in livres_empruntes %}
+                Non
+            {% endif %}
+            </td>
+            <td >
+                <div class="d-flex justify-content-between">
+                <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn text-primary">
+                    <i class="fa fa-book"></i>
+                </a>
+                <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn text-primary">
+                    <i class="fa fa-edit"></i>
+                </a>
+                {{ include('livre/_delete_form.html.twig') }}
+                <div>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">Aucun livre </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
