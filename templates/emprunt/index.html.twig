@@ -5,43 +5,8 @@
 {% block body %}
     <h1>Liste des Emprunts</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Abonné</th>
-                <th>Livre</th>
-                <th>Date_sortie</th>
-                <th>Date_rendu</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for emprunt in emprunts %}
-            <tr>
-            {# 
-            afficher le prénom de l'abonné dans un td, puis dans un autre td
-              le titre du livre suivi de l'auteur, pour chaque emprunt
-             #}
-                <td>{{ emprunt.id }}</td>
-                <td>{{ emprunt.abonne.prenom }}</td>
-                <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
-                <td>{{ emprunt.dateSortie ? emprunt.dateSortie|date('d/m/Y') : '' }}</td>
-                <td>{{ emprunt.dateRendu ? emprunt.dateRendu|date('d/m/Y') : '' }}</td>
-                <td>
-                    <a href="{{ path('emprunt_show', {'id': emprunt.id}) }}">show</a>
-                    <a href="{{ path('emprunt_edit', {'id': emprunt.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('emprunt_new') }}">Create new</a>
+    {% include "emprunt/table.html.twig" with {"emprunts": emprunts} %}
+    <a href="{{ path('emprunt_new') }}">Nouvel emprunt</a>
 
     
 {% endblock %}

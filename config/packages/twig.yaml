@@ -7,3 +7,4 @@ twig:
 
     globals:
         url_images: "/images/"
+        url_images_livres: "/images/livres/"

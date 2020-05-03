@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method Abonne[]    findAll()
  * @method Abonne[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AbonneRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class AbonneRepository extends Depot implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -64,4 +64,17 @@ class AbonneRepository extends ServiceEntityRepository implements PasswordUpgrad
         ;
     }
     */
+
+    /**
+     * Renvoie le nombre d'enregistrement de la table
+     */
+    // public function nb() : int
+    // {
+    //     $resultat = $this->createQueryBuilder('a')
+    //                     ->select("COUNT(a.id) as nb")
+    //                     ->getQuery()
+    //                     ->getOneOrNullResult()
+    //                 ;
+    //     return $resultat ? $resultat["nb"] : 0;
+    // }
 }

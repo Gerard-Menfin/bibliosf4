@@ -1,4 +1,38 @@
+{# <h2> form(form) </h2>{{ form(form) }} #}
+
+
+{# <h2> form_start(form)... form_end(form) </h2> {{ form_start(form) }} {{ form_end(form) }} #}
+
+
+{# <h2> form_start(form)...form_widget(form)... form_end(form) </h2>
+{% if livre.couverture is not null %}
+    <img class="" src="{{ asset(url_images ~ "livres/" ~ livre.couverture) }}">
+{% endif %}
+
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+ #}
+
+{# <h2> form_start(form)...form_widget(form.field)... form_end(form) </h2> #}
+
+<div class="formulaire">
+    <h1>{{ form.options.titre_formulaire ?? "Formulaire" }}</h1>
+
+    {{ form_start(form) }}
+        {% if livre.couverture is not null %}
+            <img class="vignette" src="{{ asset(url_images ~ "livres/" ~ livre.couverture) }}">
+        {% endif %}
+        {{ form_row(form.image) }}
+        {{ form_row(form.auteur) }}
+        {{ form_row(form.titre) }}
+        <div class="d-flex justify-content-between">
+            {{ form_row(form.enregistrer, { "class": "mt-3"}) }}
+            <a href="{{ path('livre_index') }}" class="btn btn-warning form-group">
+                <i class="fa fa-reply"></i>
+                Annuler
+            </a>
+        </div>
+    {{ form_end(form) }}
+</div>

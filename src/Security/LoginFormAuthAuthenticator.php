@@ -30,13 +30,15 @@ class LoginFormAuthAuthenticator extends AbstractFormLoginAuthenticator implemen
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $security;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(Security $security, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->security = $security;
     }
 
     public function supports(Request $request)
@@ -96,8 +98,11 @@ class LoginFormAuthAuthenticator extends AbstractFormLoginAuthenticator implemen
             return new RedirectResponse($targetPath);
         }
 
-        // For example : 
-        return new RedirectResponse($this->urlGenerator->generate('accueil'));
+        if($this->security->isGranted("ROLE_ADMIN")){
+            return new RedirectResponse($this->urlGenerator->generate('gestion'));           
+        } else {
+            return new RedirectResponse($this->urlGenerator->generate('accueil'));
+        }
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

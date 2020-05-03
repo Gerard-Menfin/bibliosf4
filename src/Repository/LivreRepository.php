@@ -12,13 +12,12 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Livre[]    findAll()
  * @method Livre[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LivreRepository extends ServiceEntityRepository
+class LivreRepository extends Depot
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Livre::class);
     }
-
 
     public function findBySearch($mot){
         return $this->createQueryBuilder('l')
@@ -31,6 +30,17 @@ class LivreRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByEmpruntes()
+    {
+        return $this->createQueryBuilder('l')
+            ->join("App\Entity\Emprunt", "e", "WITH", "e.livre=l.id")
+            ->andWhere('e.date_rendu IS NULL')
+            ->orderBy('l.auteur', 'ASC')
+            ->addOrderBy('l.titre')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     // /**
     //  * @return Livre[] Returns an array of Livre objects

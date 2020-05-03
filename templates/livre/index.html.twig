@@ -3,60 +3,60 @@
 {% block title %}Livres{% endblock %}
 
 {% block body %}
-    <h1>Liste des Livres</h1>
+    <h1 class="d-flex justify-content-between">
+        Liste des Livres
+    </h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Auteur</th>
-                <th>Titre</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for livre in livres %}
-            <tr>
-                <td>{{ livre.id }}</td>
-                <td>{{ livre.auteur }}</td>
-                <td>{{ livre.titre }}</td>
-                <td>
-                    <a href="{{ path('livre_show', {'id': livre.id}) }}" class="fa fa-book"></a>
-                    <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="fa fa-edit"></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucun livre </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% set lien = "" %}
+    <div class="row">
+        <div class="col-lg-7 col-md-12">
+            {% include "livre/table.html.twig" with {
+                "livres": livres, 
+                "livres_empruntes": livres_empruntes, 
+                "table_class": "table-responsive",
+                "table_titre": "Catalogue : " ~ livres|length ~ " livres"
+              } 
+            %}
+        </div>
+        
+        <div class="col-lg-5 col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="100%" class="centrer">Livres non rendus</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titre</th>
+                        <th>Date Emprunt</th>
+                    </tr>
+                </thead>
 
-    <a href="{{ path('livre_new') }}" class="fa fa-plus"> Ajouter</a>
-
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th colspan="3">Livres sortis</th>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <th>Titre</th>
-                <th>Date Emprunt</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {# Vous affichez la liste des livres non rendus #}
-            {% for emprunt in empruntsNull %}
-                <tr>
-                    <td>{{ emprunt.livre.id }}</td>
-                    <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
-                    <td>{{ emprunt.dateSortie|date("d/m/y") }}</td>
-                <tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                <tbody>
+                    {# Exo : Afficher la liste des livres non rendus #}
+                    {% for livre in livres_empruntes %}
+                        {# déclarer et affecter une variable #}
+                        {% set nb = livre.emprunts|length - 1 %}
+                        <tr>
+                            <td>{{ livre.id }}</td>
+                            <td>{{ livre.titre ~ " - " ~ livre.auteur }}</td>
+                            <td>{{ livre.emprunts[nb].dateSortie|date("d/m/y") }}</td>
+                        <tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    {#                 
+                    {% for emprunt in empruntsNull %}
+                        <tr>
+                            <td>{{ emprunt.livre.id }}</td>
+                            <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
+                            <td>{{ emprunt.dateSortie|date("d/m/y") }}</td>
+                        <tr>
+                    {% endfor %}
+                    #}
+                </tfoot>                
+            </table>
+        </div>
+    </div>
 
 {% endblock %}

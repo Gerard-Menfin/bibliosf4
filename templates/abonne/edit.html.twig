@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Abonne{% endblock %}
+{% block title %}Modifer Abonné{% endblock %}
 
 {% block body %}
-    <h1>Edit Abonne</h1>
+    <h1>Modifier l'abonné n°{{ abonne.id }}</h1>
 
-    {{ include('abonne/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('abonne/_form.html.twig', {'button_label': 'Actualiser'}) }}
 
-    <a href="{{ path('abonne_index') }}">back to list</a>
+    <div class="d-flex justify-content-between">
+        <a href="{{ path('abonne_index') }}">
+            <i class="fa fa-reply"></i> Retour à la liste
+        </a>
 
-    {{ include('abonne/_delete_form.html.twig') }}
+        {{ include('abonne/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

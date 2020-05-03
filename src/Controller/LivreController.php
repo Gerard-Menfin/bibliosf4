@@ -20,12 +20,13 @@ class LivreController extends AbstractController
     /**
      * @Route("/", name="livre_index", methods={"GET"})
      */
-    public function index(LivreRepository $livreRepository, EmpruntRepository $er): Response
+    public function index(LivreRepository $lr, EmpruntRepository $er): Response
     {
-      
+
         return $this->render('livre/index.html.twig', [
-            'livres' => $livreRepository->findAll(),
-            'empruntsNull' => $er->findByNonRendus()
+            'livres' => $lr->findAll(),
+            // 'empruntsNull' => $er->findByNonRendus(),
+            'livres_empruntes' => $lr->findByEmpruntes()
         ]);
     }
 
@@ -34,21 +35,36 @@ class LivreController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $livre = new Livre();
-        $form = $this->createForm(LivreType::class, $livre);
-        $form->handleRequest($request);
+        $nouveauLivre = new Livre();
+        $formLivre = $this->createForm(LivreType::class, $nouveauLivre);
+        $formLivre->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formLivre->isSubmitted() && $formLivre->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($livre);
-            $entityManager->flush();
 
+            $fichier = $formLivre->get("image")->getData();
+            if($fichier){
+                $nomFichier = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomFichier .= uniqid();
+                $nomFichier .= "." . $fichier->guessExtension();
+                $nomFichier = str_replace(" ", "_", $nomFichier);
+                // on enregistre le fichier téléchargé dans le dossier des images pour les couvertures de livre
+                $dossier  = $this->getParameter("dossier_images") . "livres";
+                $fichier->move($dossier, $nomFichier);
+                $nouveauLivre->setCouverture($nomFichier);
+            }
+
+            $entityManager->persist($nouveauLivre);
+            $entityManager->flush();
+            $this->addFlash("success", "Le livre <strong>" . $nouveauLivre->getTitre() . "</strong> a bien été ajouté");
             return $this->redirectToRoute('livre_index');
         }
 
+        $form = $formLivre->createView();
+        $form->options["titre_formulaire"] = "Ajouter un livre";
         return $this->render('livre/new.html.twig', [
-            'livre' => $livre,
-            'form' => $form->createView(),
+            'livre' => $nouveauLivre,
+            'form' => $form,
         ]);
     }
 
@@ -67,23 +83,34 @@ class LivreController extends AbstractController
      */
     public function edit(Request $request, Livre $livre): Response
     {
-        $form = $this->createForm(LivreType::class, $livre);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formLivre = $this->createForm(LivreType::class, $livre);
+        $formLivre->handleRequest($request);
+        if ($formLivre->isSubmitted() && $formLivre->isValid()) {
+            $fichier = $formLivre->get("image")->getData();
+            if($fichier){
+                $nomFichier = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomFichier .= uniqid();
+                $nomFichier .= "." . $fichier->guessExtension();
+                $nomFichier = str_replace(" ", "_", $nomFichier);
+                $dossier  = $this->getParameter("dossier_images") . "livres";
+                $fichier->move($dossier, $nomFichier);
+                $livre->setCouverture($nomFichier);
+            }
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash("success", "Le livre n°" . $livre->getId() . " a été modifié");
             return $this->redirectToRoute('livre_index');
         }
 
+        $formLivre = $formLivre->createView();
+        $formLivre->options["titre_formulaire"] = "Modifier le livre n°" . $livre->getId();
         return $this->render('livre/edit.html.twig', [
             'livre' => $livre,
-            'form' => $form->createView(),
+            'form' => $formLivre//->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="livre_delete", methods={"DELETE"}, requirements={"id"="\d+"})
+     * @Route("/{id}/supprimer", name="livre_delete", methods={"DELETE"}, requirements={"id"="\d+"})
      */
     public function delete(Request $request, Livre $livre): Response
     {
@@ -92,12 +119,11 @@ class LivreController extends AbstractController
             $entityManager->remove($livre);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('livre_index');
     }
 
     /**
-     * @Route("s/{id}", name="livre_afficher", methods={"GET"})
+     * @Route("s/{id}", name="livre_afficher", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function afficher(Livre $livre): Response
     {

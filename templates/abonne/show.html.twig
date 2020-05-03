@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Abonne{% endblock %}
+{% block title %}Détail Abonné{% endblock %}
 
 {% block body %}
-    <h1>Abonne</h1>
+    <h1>Détail de l'abonné</h1>
 
     <table class="table">
         <tbody>
@@ -12,23 +12,32 @@
                 <td>{{ abonne.id }}</td>
             </tr>
             <tr>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <td>{{ abonne.prenom }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
+                <th>Niveau</th>
                 <td>{{ abonne.roles ? abonne.roles|json_encode : '' }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ abonne.password }}</td>
+                <th>Mot de passe</th>
+                <td>{{ abonne.password is not null ? "***" : "" }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('abonne_index') }}">back to list</a>
+    <div class="d-flex justify-content-between">
 
-    <a href="{{ path('abonne_edit', {'id': abonne.id}) }}">edit</a>
+        <a href="{{ path('abonne_index') }}">
+            <i class="fa fa-reply"></i>
+            Retour à la liste
+        </a>
 
-    {{ include('abonne/_delete_form.html.twig') }}
+        <a href="{{ path('abonne_edit', {'id': abonne.id}) }}">
+            <i class="fa fa-edit"></i>
+            Modifier
+        </a>
+
+        {{ include('abonne/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

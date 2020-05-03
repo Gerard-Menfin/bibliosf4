@@ -79,7 +79,7 @@ class EmpruntController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="emprunt_delete", methods={"DELETE"}, requirements={"id"="\d+"})
+     * @Route("/{id}/supprimer", name="emprunt_delete", methods={"DELETE"}, requirements={"id"="\d+"})
      */
     public function delete(Request $request, Emprunt $emprunt): Response
     {

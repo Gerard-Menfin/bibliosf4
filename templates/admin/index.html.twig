@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion {% endblock %}
+
+{% block body %}
+    <h1>Gestion de la bibliotèque</h1>
+    <div class="card-columns">
+        <div class="card">
+            <div class="card-body">    
+                <h3>Abonnés</h3>
+                <p>Nombre d'abonnés : {{ nb_abonnes }}</p>
+                <a class="card-link" href="{{ path("abonne_index") }}"> <i class="fa fa-list-alt"></i> Liste </a>
+                <a class="card-link" href="{{ path("abonne_new") }}"> <i class="fa fa-plus-square"></i> Ajouter </a>
+                
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">    
+                <h3>Livres</h3>
+                <p>Nombre de livres : {{ nb_livres }}</p>
+                <a class="card-link" href="{{ path("livre_index") }}"><i class="fa fa-list-alt"></i> Liste</a>
+                <a class="card-link" href="{{ path("livre_new") }}"><i class="fa fa-plus-square"></i> Ajouter</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">    
+                <h3>Emprunt</h3>
+                <p>Nombre d'emprunts : {{ nb_emprunts }}</p>
+                <a class="card-link" href="{{ path("emprunt_index") }}"><i class="fa fa-list-alt"></i> Liste</a>
+                <a class="card-link" href="{{ path("emprunt_new") }}"><i class="fa fa-plus-square"></i> Ajouter</a>
+            </div>
+        </div>
+    </div>
+    
+    
+{% endblock %}

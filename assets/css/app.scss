@@ -1,6 +1,77 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+$theme-colors: (
+  "primary": #6600ff,
+  "secondary": #b9b8c6,
+  "success": #a366ff,
+  "danger": #ad131f,
+  "warning": #bf7a0b,
+  "info": #0ba1bf,
+  "light": #F8F9FA,
+  "dark": #343A40
+);
+
 @import '~bootstrap/scss/bootstrap';
 
 body {
+    background-image: url("/images/bibpublique_stokholm.png");
     background-color: lightgray;
+    background-size: cover;
 }
+
+h1 a {
+    font-size: .7em;
+}
+
+img.mini{
+    height: 50px;
+}
+
+img.vignette{
+    height: 100px;
+}
+
+// Pour avoir un footer en bas de page
+html {
+    position: relative;
+    min-height: 100%;
+}
+ 
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #000000;
+    color: #FFFFFF;
+}
+
+// FORM 
+div.formulaire {
+    background-color: $light;
+    color: color-yiq(#e6def1);
+    padding: $spacer * .5;
+    margin-top: $spacer;
+}
+form label{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+// TABLE
+tr.centrer th, thead.centrer th{
+    text-align: center;
+}
+
+table.transparent{
+    background-color: rgba(248, 249, 250, .2);
+    color: color-yiq(rgba(248, 249, 250, .2));
+    text-shadow: 1px 1px 1px $light;
+    font-weight: 600;
+}
+
+table.rayon{
+    font-weight: 600;
+    background-image: url("/images/natural-wood-grain-background.jpg");
+}
+

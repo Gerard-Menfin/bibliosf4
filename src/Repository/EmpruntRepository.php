@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Emprunt[]    findAll()
  * @method Emprunt[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EmpruntRepository extends ServiceEntityRepository
+class EmpruntRepository extends Depot
 {
     public function __construct(ManagerRegistry $registry)
     {

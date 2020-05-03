@@ -21,8 +21,9 @@ class FormLivreType extends AbstractType
         // ajouter un bouton submit
         $builder
             ->add('auteur', TextType::class, [ "constraints" => 
-                                                    [ new Length([ "max" => 20,
-                                                                   "maxMessage" => "Le nom de l'auteur ne peut pas dépasser 20 caractères"
+                                                    [ new Length([ "max" => 25,
+                                                                   "maxMessage" => "Le nom de l'auteur ne peut pas dépasser {{ limit }} caractères",
+                                                                   "help" => "Le nom de l'auteur ne peut pas dépasser 25 caractères"
                                                                  ]) 
                                                     ] 
                                                  ])
@@ -41,7 +42,7 @@ class FormLivreType extends AbstractType
                                                 ])]
                 ])
             
-            ->add('Enregistrer', SubmitType::class, [ 'attr' => [
+            ->add('enregistrer', SubmitType::class, [ 'attr' => [
                                                             'class' => 'btn btn-primary'
                                                           ]
                                                     ])

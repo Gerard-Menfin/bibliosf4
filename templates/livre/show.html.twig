@@ -1,33 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Livre{% endblock %}
+{% block title %}Fiche Livre{% endblock %}
 
 {% block body %}
-    <h1>Livre</h1>
+    <h1>Fiche détaillée du livre</h1>
 
-    <table class="table">
+    <table class=" rayon">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th class="thead-dark">Référence</th>
                 <td>{{ livre.id }}</td>
-            </tr>
-            <tr>
-                <th>Auteur</th>
-                <td>{{ livre.auteur }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
                 <td>{{ livre.titre }}</td>
             </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ livre.auteur|upper }}</td>
+            </tr>
+            <tr>
+                <th>Couverture</th>
+                <td><img class="img-thumbnail" src="{{ asset(url_images ~ "livres/") ~ livre.couverture }}"></td>
+            </tr>
         </tbody>
     </table>
 
     {% if is_granted("ROLE_ADMIN") %}
-        <a href="{{ path('livre_index') }}">Retour à la liste</a>
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('livre_index') }}">
+                <i class="fa fa-reply"></i>
+                Retour à la liste
+            </a>
+            <a href="{{ path('livre_edit', {'id': livre.id}) }}">
+                <i  class="fa fa-edit"></i>
+                Modifier
+            </a>
+            {{ include('livre/_delete_form.html.twig') }}
+        </div>
 
-        <a href="{{ path('livre_edit', {'id': livre.id}) }}">Modifier</a>
 
-        {{ include('livre/_delete_form.html.twig') }}
     {% else %}
         <a href="{{ path('accueil') }}">
             <i class="fa fa-home"></i>

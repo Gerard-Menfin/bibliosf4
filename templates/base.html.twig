@@ -2,27 +2,33 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Accueil{% endblock %} | Biblio</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags("app") }}
         {% endblock %}
     </head>
+
     <body>
+        {# MENU #}
         {% block nav %}
             {% include "menu.html.twig" %}
         {% endblock %}
 
-        <div class="container">
-            {% for type, messages in app.flashes %}
-            <div class="alert alert-{{ type }}">
-                {% for message in messages %}
-                    {{ message|raw }}
-                {% endfor %}
-            </div>
+        {# MESSAGES #}
+        {% for type, messages in app.flashes %}
+        <div class="alert alert-{{ type }}">
+            {% for message in messages %}
+                {{ message|raw }}
             {% endfor %}
+        </div>
+        {% endfor %}
 
+        <div class="container pt-2">
             {% block body %}
                 <h1>Bienvenue à la bibliothèque</h1>
+                
+                {% block formulaire %}{% endblock %}
+                
                 <div>
                     <h2>Liste des livres : {{ liste_livres|length }}</h2>
                     {% if liste_livres|length %}                        
@@ -35,10 +41,10 @@
                     {% else %}
                         <div class="alert alert-warning">Aucun livre, ni auteur, ne correspond à votre recherche</div>
                     {% endif %}
-                            
                 </div>
             {% endblock %}
         </div>
+        {% include "footer.html.twig" %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags("app") }}

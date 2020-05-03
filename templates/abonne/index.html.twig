@@ -3,35 +3,7 @@
 {% block title %}Abonnés{% endblock %}
 
 {% block body %}
-    <h1>Liste des abonnées : {{ abonnes|length }} abonnés</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Prénom</th>
-                <th>Rôles</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for abonne in abonnes %}
-            <tr>
-                <td>{{ abonne.id }}</td>
-                <td>{{ abonne.prenom }}</td>
-                <td>{{ abonne.roles ? abonne.roles|json_encode : '' }}</td>
-                <td>
-                    <a href="{{ path('abonne_show', {'id': abonne.id}) }}">show</a>
-                    <a href="{{ path('abonne_edit', {'id': abonne.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('abonne_new') }}">Create new</a>
+    <h1>Liste des abonnés : {{ abonnes|length }} abonnés</h1>
+    {% include "abonne/table.html.twig" with { "abonnes": abonnes } %}
+    <a href="{{ path('abonne_new') }}"><i class="fa fa-plus"></i> Ajouter</a>
 {% endblock %}
