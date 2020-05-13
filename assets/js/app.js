@@ -9,9 +9,8 @@
 import '../css/app.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
-
-const $ = require('jquery'); 
+import $ from 'jquery';
+// const $ = require('jque  ry'); 
 require('bootstrap');
 
 
@@ -24,13 +23,10 @@ function readURL(input) {
         
         reader.onload = function (e) {
             let nom = $(this).attr("name");
-            console.log("onload : " + e.target.result, "name: " + nom, $(input));
             $(input).parent().parent().find("label img").remove();
             $(input).parent().parent().find("label").append("<img class='mini ml-3' src='" + e.target.result + "'>");
-            console.log("onload : " + e.target.result);
             $(input).next('.custom-file-label').html(input.files[0].name);    
         }
-        console.log("reader.readAsDataURL : ", input.files[0]); 
         reader.readAsDataURL(input.files[0]);
     }
 }
@@ -46,11 +42,10 @@ $(function(){
     
     // forms
     $("[type='file']").change(function(){
-        console.log("change");
         readURL(this);
         var fileName = $(this).val();
         //replace the "Choose a file" label
-        $(this).next('.custom-file-label').html(fileName);    });
+        $(this).next('.custom-file-label').html(fileName);    
+    });
 
-    console.log($);
 });

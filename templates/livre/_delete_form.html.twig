@@ -1,8 +1,8 @@
 <form method="post" action="{{ path('livre_delete', {'id': livre.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ livre.id) }}">
-    <button class="btn">
-        <i class="fa fa-trash text-danger"></i>
+    <button class="btn text-danger">
+        <i class="fa fa-trash"></i>
         {% if texte is defined %}
             Supprimer
         {% endif %}

@@ -1,4 +1,14 @@
-<table class="table {{ table_class is not null ? table_class : "" }}">
+{# <table class="table {{ table_class is defined ? table_class : "" }}"> #}
+<table class="table {{ table_class ?? "" }}">
+    <colgroup>
+        <col class="col_id">
+        <col class="col_couv">
+        <col class="col_auteur">
+        <col class="col_titre">
+        <col class="col_dispo">
+        <col class="col_actions">
+    </colgroup>
+
     <thead class="thead-dark">
         {% if table_titre is not null %}
             <tr>
@@ -15,24 +25,30 @@
         {% endif %}
         <tr class="centrer">
             <th>Id</th>
-            <th>Couverture</th>
+            <th scope="col">Couverture</th>
             <th>Auteur</th>
             <th>Titre</th>
             <th>Disponible</th>
             <th>Actions</th>
         </tr>
     </thead>
+    
     <tbody>
     {% for livre in livres %}
         <tr>
             <td>{{ livre.id }}</td>
-            <td>{{ livre.couverture|img("livres", "mini")|raw }}</td>
+            <td class="text-center">
+                {% if livre.couverture is null %}
+                    <del class="fa fa-image"></del>
+                {% else %}
+                    {{ livre.couverture|img("livres", "mini")|raw }}</td>
+                {% endif %}
             <td>{{ livre.auteur }}</td>
             <td>{{ livre.titre }}</td>
             <td>
             {% if livre in livres_empruntes %}
                 Non
-            {% endif %}
+            {% endif %}            
             </td>
             <td >
                 <div class="d-flex justify-content-between">

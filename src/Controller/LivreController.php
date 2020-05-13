@@ -104,7 +104,7 @@ class LivreController extends AbstractController
         $formLivre = $formLivre->createView();
         $formLivre->options["titre_formulaire"] = "Modifier le livre n°" . $livre->getId();
         return $this->render('livre/edit.html.twig', [
-            'livre' => $livre,
+            // 'livre' => $livre,
             'form' => $formLivre//->createView(),
         ]);
     }

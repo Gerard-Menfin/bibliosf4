@@ -1,0 +1,27 @@
+<div class="card livre">
+  <div class="row">
+    <div class="col-4 d-flex align-items-center">
+      <img class="card-img p-1" src="{{ asset(url_images_livres ~ livre.couverture) }}">
+    </div>
+
+    <div class="col-8">
+      <div class="card-body">
+        <h4 class="card-title">{{ livre.titre }}</h4>
+        <p class="card-text">{{ livre.auteur }}</p>
+        {% if is_granted("ROLE_ADMIN") %}
+
+          <a href="{{ path("livre_show", { id: livre.id}) }}" class="card-link">
+              <i class="fa fa-book"></i> Voir plus
+          </a>
+        {% else %}
+        
+          <a href="{{ path("livre_afficher", { id: livre.id}) }}" class="card-link">
+              <i class="fa fa-book"></i> Voir plus
+          </a>
+          
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,12 +4,13 @@ $theme-colors: (
   "primary": #6600ff,
   "secondary": #b9b8c6,
   "success": #a366ff,
-  "danger": #ad131f,
+  "danger": #81161f,
   "warning": #bf7a0b,
   "info": #0ba1bf,
   "light": #F8F9FA,
   "dark": #343A40
 );
+$secondary: #b9b8c6;
 
 @import '~bootstrap/scss/bootstrap';
 
@@ -31,6 +32,7 @@ img.vignette{
     height: 100px;
 }
 
+// FOOTER
 // Pour avoir un footer en bas de page
 html {
     position: relative;
@@ -39,7 +41,7 @@ html {
  
 .footer {
     position: absolute;
-    bottom: 0;
+    bottom: -60px; // <> bottom: 0   =>   pour éviter de cacher le bas de la page
     width: 100%;
     height: 60px;
     background: #000000;
@@ -50,7 +52,7 @@ html {
 div.formulaire {
     background-color: $light;
     color: color-yiq(#e6def1);
-    padding: $spacer * .5;
+    padding: $spacer;
     margin-top: $spacer;
 }
 form label{
@@ -75,3 +77,18 @@ table.rayon{
     background-image: url("/images/natural-wood-grain-background.jpg");
 }
 
+del{
+    border: 1px solid $danger;
+}
+
+// CARD
+h4.card-header{
+    // pour afficher le titre sur 1 ligne et afficher le caractère ... 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card.livre{
+    min-height: 160px;
+}

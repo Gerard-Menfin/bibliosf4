@@ -1,11 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Livres{% endblock %}
 
+
 {% block body %}
-    <h1 class="d-flex justify-content-between">
-        Liste des Livres
-    </h1>
+    <h1>{% block h1 %}Liste des Livres{% endblock %}</h1>
 
     {% set lien = "" %}
     <div class="row">
@@ -13,7 +12,6 @@
             {% include "livre/table.html.twig" with {
                 "livres": livres, 
                 "livres_empruntes": livres_empruntes, 
-                "table_class": "table-responsive",
                 "table_titre": "Catalogue : " ~ livres|length ~ " livres"
               } 
             %}
@@ -41,6 +39,7 @@
                             <td>{{ livre.id }}</td>
                             <td>{{ livre.titre ~ " - " ~ livre.auteur }}</td>
                             <td>{{ livre.emprunts[nb].dateSortie|date("d/m/y") }}</td>
+                            {# <td>{{ livre.emprunts|last.dateSortie|date("d/m/y") }}</td> #}
                         <tr>
                     {% endfor %}
                 </tbody>

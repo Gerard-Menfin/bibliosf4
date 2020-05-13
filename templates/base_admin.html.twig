@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Accueil{% endblock %} | Biblio</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags("app") }}
+        {% endblock %}
+    </head>
+
+    <body>
+        {% include "menu.html.twig" %}
+
+        <div class="row h-100 mx-0"> {# .row définie margin left et right à -15px #}
+            <aside class="col-12 col-md-2 bg-dark">
+                {% block nav_side %}
+                    {% include "menu_admin.html.twig" %}
+                {% endblock %}
+            </aside>
+
+            <main class="col">
+                <div class="container pt-2">
+                    {% include "message.html.twig" %}
+                    
+                    {% block body %}
+                        <h1>{% block h1 %}Bienvenue à la bibliothèque{% endblock %}</h1>
+                        
+                        {% block formulaire %}{% endblock %}
+                        
+                        <div>
+                            <h2>Liste des livres : {{ liste_livres|length }}</h2>
+                            {% if liste_livres|length %}                        
+                                <div class="card-columns">
+                                    {# EXO : afficher la liste des livres #}
+                                    {% for livre in liste_livres %}
+                                        {% include "livre/vignette.html.twig" with { "livre": livre } %}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning">Aucun livre, ni auteur, ne correspond à votre recherche</div>
+                            {% endif %}
+                        </div>
+                    {% endblock %}
+                </div>           
+            </main>
+        </div>
+
+        {% include "footer.html.twig" %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags("app") }}
+        {% endblock %}
+    </body>
+</html>
