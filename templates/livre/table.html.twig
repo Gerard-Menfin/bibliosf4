@@ -1,4 +1,5 @@
 {# <table class="table {{ table_class is defined ? table_class : "" }}"> #}
+{# <table class="table {{ table_class|default("") }}"> #}
 <table class="table {{ table_class ?? "" }}">
     <colgroup>
         <col class="col_id">

@@ -12,7 +12,8 @@
             <tr>
                 <td>{{ abonne.id }}</td>
                 <td>{{ abonne.prenom }}</td>
-                <td>{{ abonne.roles ? abonne.roles|json_encode : '' }}</td>
+                {# <td>{{ abonne.roles ? abonne.roles|json_encode</td> #}
+                <td>{{ abonne.roles ? abonne.roles|join(", ")|replace({"ROLE_USER": "Lecteur", "ROLE_ADMIN": "Bibliothécaire"}) : '' }}</td>
                 <td class="d-flex justify-content-between">
                     <a href="{{ path('abonne_show', {'id': abonne.id}) }}">
                         <i class="fa fa-user"></i>
