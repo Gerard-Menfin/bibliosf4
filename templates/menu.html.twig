@@ -28,7 +28,7 @@
 
         <li class="nav-item">
           <a class="nav-link" href="{{ path("app_logout") }}">
-            <i class="fa fa-sign-out-alt"></i>
+            <i class="fa fa-sign-out-alt"></i> Déconnexion
           </a>
         </li>
 
@@ -36,13 +36,13 @@
 
         <li class="nav-item {{ app.request.pathinfo == path("app_login") ? "active" : "" }}">
           <a class="nav-link" href="{{ path("app_login") }}">
-            <i class="fa fa-sign-in-alt"></i>
+            <i class="fa fa-sign-in-alt"></i> Connexion
           </a>
         </li>
 
         <li class="nav-item {{ app.request.pathinfo == path("app_register") ? "active" : "" }}">
           <a class="nav-link" href="{{ path("app_register") }}">
-            <i class="fa fa-door-open"></i>
+            <i class="fa fa-door-open"></i> Inscription
             
           </a>
         </li>

@@ -1,0 +1,18 @@
+// html{
+//     height: 100%;
+//     background-color: lightsteelblue;
+// }
+
+$largeur_aside: 200px; 
+
+aside{
+    position: fixed;
+    width: $largeur_aside;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.right-aside{
+    margin-left: $largeur_aside;
+}
