@@ -9,10 +9,12 @@
 import '../css/app.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-import $ from 'jquery';
-// const $ = require('jque  ry'); 
+// import $ from 'jquery';
+const $ = require('jquery'); 
 require('bootstrap');
 
+// create global $ and jQuery variables
+global.$ = global.jQuery = $;
 
 /* Fonction pour  l'affichage de l'image juste après le téléchargement depuis un input file 
    Déclencher cette fonction dans l'écouteur d'évènement "change" des inputs 
