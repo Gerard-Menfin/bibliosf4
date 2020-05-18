@@ -43,3 +43,6 @@ security:
         # ROLE_BIBLIOTHECAIRE: ROLE_USER
         ROLE_ADMIN: ROLE_BIBLIOTHECAIRE
         ROLE_DEV: ROLE_ADMIN, ROLE_USER
+
+    # Redirection Access Denied (error 403)
+    access_denied_url: /
