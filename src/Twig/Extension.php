@@ -14,15 +14,22 @@ class Extension extends AbstractExtension
         $this->parameters = $parameters;
     }
 
-    // pour créer un nouveau filtre
+    /**
+     * Pour créer un nouveau filtre
+     * 
+     */
     public function getFilters()
     {
         return [
             new TwigFilter('img', [$this, 'baliseImg']),
+            new TwigFilter('accreditation', [$this, 'accreditation'])
         ];
     }
 
-    //pour créer une nouvelle fonction
+    /**
+     * Pour créer une nouvelle fonction
+     * 
+     */
     public function getFunctions()
     {
         return [
@@ -30,6 +37,10 @@ class Extension extends AbstractExtension
         ];
     }
 
+
+    /**
+     * Renvoie une balise <img>
+     */
     public function baliseImg($nomImage, $dossier = "", $classes = "") : string
     {
         $balise = "";
@@ -42,6 +53,21 @@ class Extension extends AbstractExtension
             $balise = html_entity_decode($balise);
         }
         return $balise;
+    }
+
+    /**
+     * Remplace le ROLE_ par un texte défini
+     */
+    public function accreditation(array $roles) : string {
+        // si l'array est vide, $role= "ROLE_USER"
+        $role = $roles[0] ?? "ROLE_USER";
+        $accreditations = [
+            "ROLE_USER" => "Lecteur",
+            "ROLE_BIBLIOTHECAIRE" => "Bibliothécaire",
+            "ROLE_ADMIN" => "Directeur",
+            "ROLE_DEV" => "Développeur",
+        ];
+        return $accreditations[$role];
     }
 
 }

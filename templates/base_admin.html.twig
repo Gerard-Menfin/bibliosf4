@@ -18,7 +18,7 @@
             {% include "admin/menu.html.twig" %}
 		</aside>
 
-		<main class="container">
+		<main class="right-aside container">
 			<div class="container pt-2">
 				{% include "message.html.twig" %}
 
@@ -51,8 +51,7 @@
 
 		{% include "footer.html.twig" %}
 
-		{% block javascripts %}
-			{{ encore_entry_script_tags("app") }}
-		{% endblock %}
+		{{ encore_entry_script_tags("app") }}
+		{% block javascripts %}{% endblock %}
 	</body>
 </html>

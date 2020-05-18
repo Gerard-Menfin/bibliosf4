@@ -1,7 +1,18 @@
-{{ form_start(form, { "attr": { "class": "bg-light" }}) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-    <a href="{{ path("abonne_index") }}" class="btn btn-warning">
-        <i class="fa fa-reply"></i> Annuler
-    </a>
+{% set abonne = form.vars.value %}
+{{ form_start(form) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.roles) }}
+    {{ form_row(form.password) }}
+
+    <div class="d-flex justify-content-between mt-5">
+        {# <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button> #}
+        {{ form_row(form.enregistrer) }}
+        <a href="{{ path("abonne_index") }}" class="btn btn-warning form-group">
+            <i class="fa fa-reply"></i> Annuler
+        </a>
+    </div>
 {{ form_end(form) }}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags("form") }}
+{% endblock %}
