@@ -1,27 +1,11 @@
-{# <h2> form(form) </h2>{{ form(form) }} #}
+{% extends "admin/formulaire.html.twig" %}
 
+{% block titre_formulaire %}
+    {{ form.options.titre_formulaire ?? "Formulaire Livre" }}
+{% endblock %}
 
-{# <h2> form_start(form)... form_end(form) </h2> {{ form_start(form) }} {{ form_end(form) }} #}
-
-
-{# 
-<h2> form_start(form)...form_widget(form)... form_end(form) </h2>
-{% if livre.couverture is not null %}
-    <img class="" src="{{ asset(url_images ~ "livres/" ~ livre.couverture) }}">
-{% endif %}
-
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
- #}
-
-{# <h2> form_start(form)...form_widget(form.field)... form_end(form) </h2> #}
-
-{% set livre = form.vars.value %} {# récupère l'objet envoyé comme paramètre dans la méthode createForm #}
-<div class="formulaire">
-    <h1 class="bg-secondary mb-4">{{ form.options.titre_formulaire ?? "Formulaire" }}</h1>
-
+{% block formulaire %}
+    
     {{ form_start(form) }}
         {% if livre.couverture is not null %}
             <div class="row bg-secondary_">
@@ -46,4 +30,27 @@
             </a>
         </div>
     {{ form_end(form) }}
-</div>
+
+{% endblock %}
+
+
+
+{# <h2> form(form) </h2>{{ form(form) }} #}
+
+
+{# <h2> form_start(form)... form_end(form) </h2> {{ form_start(form) }} {{ form_end(form) }} #}
+
+
+{# 
+<h2> form_start(form)...form_widget(form)... form_end(form) </h2>
+{% if livre.couverture is not null %}
+    <img class="" src="{{ asset(url_images ~ "livres/" ~ livre.couverture) }}">
+{% endif %}
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
+ #}
+
+{# <h2> form_start(form)...form_widget(form.field)... form_end(form) </h2> #}

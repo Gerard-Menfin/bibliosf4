@@ -23,7 +23,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/gestion", name="gestion")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_BIBLIOTHECAIRE")
      */
     public function gestion(LivreRepository $lr, EmpruntRepository $er, AbonneRepository $ar){
         $nb_abonnes = $ar->nb();

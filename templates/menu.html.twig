@@ -6,25 +6,17 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      {% if is_granted("ROLE_ADMIN") %}
-  
-        <li class="nav-item {{ app.request.pathinfo == path("abonne_index") ? "active" : "" }}">
-          <a class="nav-link" href="{{ path("abonne_index") }}">Abonnés </a>
-        </li>
-        <li class="nav-item {{ app.request.pathinfo == path("livre_index") ? "active" : "" }}">
-          <a class="nav-link" href="{{ path("livre_index") }}">Livres</a>
-        </li>
-        <li class="nav-item {{ app.request.pathinfo == path("emprunt_index") ? "active" : "" }}">
-          <a class="nav-link" href="{{ path("emprunt_index") }}">Emprunts</a>
-        </li>
-
-      {% endif %}
 
       {% if is_granted("IS_AUTHENTICATED_FULLY") %}
 
         <li class="nav-item ">
           <a class="nav-link" href="{{ path("profil") }}">{{ app.user.username }}</a>
         </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="">{{ app.user.roles|accreditation }}</a>
+        </li>
+
 
         <li class="nav-item">
           <a class="nav-link" href="{{ path("app_logout") }}">

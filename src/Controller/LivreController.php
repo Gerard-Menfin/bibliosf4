@@ -61,6 +61,9 @@ class LivreController extends AbstractController
         }
 
         $form = $formLivre->createView();
+
+        // j'ajoute une propriété à l'objet $form pour passer
+        // des paramètres supplémentaires à la vue
         $form->options["titre_formulaire"] = "Ajouter un livre";
         return $this->render('livre/new.html.twig', [
             'livre' => $nouveauLivre,
