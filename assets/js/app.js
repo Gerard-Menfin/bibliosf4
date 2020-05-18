@@ -13,16 +13,27 @@ import '../css/app.scss';
 const $ = require('jquery'); 
 require('bootstrap');
 
-// create global $ and jQuery variables
+// ⚠ fixe le problème d'utilisation tardive de jQuery
+//  create global $ and jQuery variables
 global.$ = global.jQuery = $;
 
-/* Fonction pour  l'affichage de l'image juste après le téléchargement depuis un input file 
-   Déclencher cette fonction dans l'écouteur d'évènement "change" des inputs 
+/* ⚠
+ * Pour fixer le menu ☰ Bootstrap avec jQueyy 3.5, il faut modifier le fichier
+ * node_modules/bootstrap/dist/js/bootstrap.js
+ * remplacer
+ *      if (!data && _config.toggle && /show|hide/.test(config)) {
+ * par
+ *      if (!data && _config.toggle && /show|hide/.test(_config)) {
+ * 
+ */
+
+/* 
+ * Fonction pour  l'affichage de l'image juste après le téléchargement depuis un input file 
+ * Déclencher cette fonction dans l'écouteur d'évènement "change" des inputs 
 */
 function readURL(input) {
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        
+        var reader = new FileReader();     
         reader.onload = function (e) {
             let nom = $(this).attr("name");
             $(input).parent().parent().find("label img").remove();
