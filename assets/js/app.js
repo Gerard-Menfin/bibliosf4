@@ -27,6 +27,9 @@ global.$ = global.jQuery = $;
  * 
  */
 
+
+console.log('%c app.js ', 'background-color: #222; color: #fff');
+
 /* 
  * Fonction pour  l'affichage de l'image juste après le téléchargement depuis un input file 
  * Déclencher cette fonction dans l'écouteur d'évènement "change" des inputs 

@@ -5,12 +5,8 @@
 {% block body %}
 
     {% block formulaire %}
-        <div class="formulaire">
-            <h1 class="bg-secondary mb-4">Modifier l'abonné n°{{ abonne.id }}</h1>
             {{ include('abonne/_form.html.twig', {'button_label': 'Actualiser'}) }}
-        </div>    
     {% endblock %}
-
 
     <div class="d-flex justify-content-between bg-secondary mt-5">
         <a href="{{ path('abonne_index') }}" class="btn text-primary">

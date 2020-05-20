@@ -6,3 +6,10 @@
 
     {% block formulaire %}{% endblock %}
 </div>
+
+
+{#
+ # le block javascripts ne peut pas être dans la fvue _form qui hérite de cette vue 
+ #  si cette vue n'a pas elle-même un block javascripts
+ #}
+{% block javascripts %}{% endblock %}

@@ -4,6 +4,13 @@
     {{ form.options.titre_formulaire ?? "Formulaire Livre" }}
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags("form") }}
+{% endblock %}
+
+{% set livre = form.vars.value %} {# récupère l'objet envoyé comme paramètre dans la méthode createForm #}
+
 {% block formulaire %}
     
     {{ form_start(form) }}

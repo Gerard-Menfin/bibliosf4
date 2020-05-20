@@ -1,7 +1,6 @@
 {% extends "admin/formulaire.html.twig" %}
 
 {% block titre_formulaire %}
-
     {% set abonne = form.vars.value %}
     {% if abonne.id is null %}
         Ajouter un abonné
@@ -29,7 +28,6 @@
     {{ form_end(form) }}
     
 {% endblock %}
-
 
 {% block javascripts %}
     {{ encore_entry_script_tags("form") }}
