@@ -98,6 +98,11 @@ h4.card-header{
     text-overflow: ellipsis;
 }
 
+// CARD vignette livre
 .card.livre{
     min-height: 160px;
+}
+
+.livre > .couverture{
+    height: 160px !important;
 }
