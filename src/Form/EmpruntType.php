@@ -16,10 +16,10 @@ class EmpruntType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('livre', EntityType::class, [ "class" => Livre::class, "choice_label" => "titre" ] )
-        ->add('abonne', EntityType::class, [ "class" => Abonne::class, "choice_label" => "prenom" ] )
-        ->add('date_sortie', DateType::class, [ "widget" => "single_text" ])
-        ->add('date_rendu', DateType::class, [ "widget" => "single_text", "required" => false ])
+            ->add('livre', EntityType::class, [ "class" => Livre::class, "choice_label" => "titre" ] )
+            ->add('abonne', EntityType::class, [ "class" => Abonne::class, "choice_label" => "prenom" ] )
+            ->add('date_sortie', DateType::class, [ "widget" => "single_text" ])
+            ->add('date_rendu', DateType::class, [ "widget" => "single_text", "required" => false ])
         ;
     }
 

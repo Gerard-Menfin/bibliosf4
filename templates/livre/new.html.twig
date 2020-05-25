@@ -3,7 +3,8 @@
 {% block title %}Nouveau livre{% endblock %}
 
 {% block body %}
-
-    {{ include('livre/_form.html.twig') }}
+    {% block formulaire %}
+        {{ include('livre/_form.html.twig') }}
+    {% endblock %}
 
 {% endblock %}
