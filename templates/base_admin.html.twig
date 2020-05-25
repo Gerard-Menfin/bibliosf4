@@ -49,7 +49,7 @@
 			</div>
 		</main>
 
-		{% include "footer.html.twig" %}
+		{% include "footer.html.twig" with { "footer_admin": true } %}
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags("app") }}
