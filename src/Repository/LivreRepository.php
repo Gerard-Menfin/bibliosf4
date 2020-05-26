@@ -30,6 +30,10 @@ class LivreRepository extends Depot
         ;
     }
 
+    /**
+     * Requête avec jointure
+     * @return Array of App\Entity\Livre object
+     */
     public function findByEmpruntes()
     {
         return $this->createQueryBuilder('l')
@@ -42,32 +46,27 @@ class LivreRepository extends Depot
         ;
     }
 
-    // /**
-    //  * @return Livre[] Returns an array of Livre objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Nombre de livres empruntés actuellement
+     * SELECT COUNT(*)
+     * FROM livre l
+     *  JOIN emprunt e ON l.id = e.livre_id
+     * WHERE e.date_rendu IS NULL
+     * @return integer
+     */
+    public function nbSortis() : int
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $requete = $this->createQueryBuilder("l")
+                        ->select("COUNT(l.id) as nb")
+                        ->join("App\Entity\Emprunt", "e", "WITH", "e.livre=l.id")
+                        ->andWhere('e.date_rendu IS NULL')
+                        ->getQuery()
+                        ->getOneOrNullResult();
+        return $requete ? (int)$requete["nb"] : 0;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Livre
+    public function nbDisponibles()
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->nb() - $this->nbSortis();
     }
-    */
 }
