@@ -24,9 +24,9 @@ class LivreController extends AbstractController
     {
 
         return $this->render('livre/index.html.twig', [
-            'livres' => $lr->findAll(),
-            // 'empruntsNull' => $er->findByNonRendus(),
+            'livres' => $lr->findAll(["auteur" => "ASC", "titre" => "ASC"]),
             'livres_empruntes' => $lr->findByEmpruntes()
+            // 'empruntsNull' => $er->findByNonRendus(),
         ]);
     }
 
