@@ -26,12 +26,26 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_BIBLIOTHECAIRE")
      */
     public function gestion(LivreRepository $lr, EmpruntRepository $er, AbonneRepository $ar){
-        $nb_abonnes = $ar->nb();
-        $nb_livres = $lr->nb();
-        $nb_emprunts = $er->nb();
+        $emprunts = $er->findAll(["date_rendu" => "ASC", "date_sortie" => "ASC"]);
+        $empruntsEnCours = $er->findByNonRendus();
+        $emprunts["liste"] = $emprunts;
+        $emprunts["nb"] = $er->nb();
+        
+        $livres["liste"] = $lr->findAll();
+        $livres["nb"] = $lr->nb();
+        $livres["nbSortis"] = $lr->nbSortis();
+        $livres["nbDisponibles"] = $lr->nbDisponibles();
+        $livres["plusAncienEmprunt"] = count($empruntsEnCours) ? $empruntsEnCours[0] : null;
+        $livres_empruntes = $lr->lesPlusEmpruntes();
         // $livres_empruntes = array_splice($livres_empruntes, 0, 5);
+        $livres["plusEmprunte"] = $livres_empruntes[0];
+        $livres["moinsEmprunte"] = end($livres_empruntes);
+        
+        $abonnes["liste"] = $ar->findAll();
+        $abonnes["nb"] = $ar->nb();
 
-        return $this->render("admin/index.html.twig", compact("nb_abonnes", "nb_livres", "nb_emprunts"));
+
+        return $this->render("admin/index.html.twig", compact("livres", "abonnes", "emprunts"));
     }
 
 }

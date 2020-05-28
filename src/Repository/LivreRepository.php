@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Livre;
+use App\Entity\Livre, App\Entity\Emprunt;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -31,7 +31,7 @@ class LivreRepository extends Depot
     }
 
     /**
-     * Requête avec jointure
+     * Requête avec jointure : livres empruntés non rendus
      * @return Array of App\Entity\Livre object
      */
     public function findByEmpruntes()
@@ -65,8 +65,41 @@ class LivreRepository extends Depot
         return $requete ? (int)$requete["nb"] : 0;
     }
 
-    public function nbDisponibles()
+    /**
+     * Nombre de livres disponibles
+     * @return integer
+     */
+    public function nbDisponibles() : int
     {
         return $this->nb() - $this->nbSortis();
+    }
+
+    /**
+     * Livres les plus emprunts
+     * Requête SQL :
+     *  SELECT l.titre, COUNT(*) AS nb
+     *  FROM livre l
+     *   JOIN emprunt e ON l.id = e.livre_id
+     *  GROUP BY l.titre
+     *  ORDER BY nb DESC, l.titre ASC
+     * 
+     * @param $max integer
+     */
+    public function lesPlusEmpruntes($max=0)
+    {
+        // NB : s'il n'y a pas de champ reliant les deux entités dans l'entité du Repository actuel
+        //      il faut préciser les champs liés (? le mot ON ne fonctionne pas)
+        // NB : dans la méthode select l équivaut à l.*
+        $requete = $this->createQueryBuilder("l")
+                        ->join(Emprunt::class, "e", "WITH", "l.id = e.livre")
+                        ->groupBy("l.titre")
+                        ->select("l AS livre, COUNT(l.id) AS nbEmprunts")
+                        ->orderBy("nbEmprunts", "DESC")
+                        ->addOrderBy("l.titre", "ASC")
+        ;
+        if($max) $requete->setMaxResults($max);
+        return  $requete->getQuery()
+                        ->getResult()
+        ;
     }
 }
