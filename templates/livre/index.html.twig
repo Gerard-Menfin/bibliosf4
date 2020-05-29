@@ -4,8 +4,6 @@
 
 
 {% block body %}
-    <h1>{% block h1 %}Liste des Livres{% endblock %}</h1>
-
     {% set lien = "" %}
     <div class="row">
         <div class="col-lg-7 col-md-12">
@@ -21,12 +19,11 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th colspan="100%" class="centrer">Livres non rendus</th>
+                        <th colspan="100%" class="centrer"><h1>Livres non rendus</h1></th>
                     </tr>
                     <tr>
-                        <th>ID</th>
-                        <th>Titre</th>
-                        <th>Date Emprunt</th>
+                        <th>Livre</th>
+                        <th>Emprunté le</th>
                     </tr>
                 </thead>
 
@@ -36,7 +33,6 @@
                         {# déclarer et affecter une variable #}
                         {% set nb = livre.emprunts|length - 1 %}
                         <tr>
-                            <td>{{ livre.id }}</td>
                             <td>{{ livre.titre ~ " - " ~ livre.auteur }}</td>
                             <td>{{ livre.emprunts[nb].dateSortie|date("d/m/y") }}</td>
                             {# <td>{{ livre.emprunts|last.dateSortie|date("d/m/y") }}</td> #}

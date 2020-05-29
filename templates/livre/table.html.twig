@@ -15,14 +15,14 @@
             <tr>
                 <th colspan="100%">
                     <div class="d-flex justify-content-between">
-                        <div>{{ table_titre }}</div>
+                        <div><h1>{{ table_titre }}</h1></div>
                         <a href="{{ path('livre_new') }}" class="mr-3"> 
                             <i class="fa fa-plus-square"></i>
                             Ajouter
                         </a>
                     </div>
                 </th>
-            </tr>            
+            </tr>
         {% endif %}
         <tr class="centrer">
             <th>Id</th>
@@ -49,17 +49,17 @@
             <td>
             {% if livre in livres_empruntes %}
                 Non
-            {% endif %}            
+            {% endif %}
             </td>
-            <td >
+            <td>
                 <div class="d-flex justify-content-between">
-                <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn text-primary">
-                    <i class="fa fa-book"></i>
-                </a>
-                <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn text-primary">
-                    <i class="fa fa-edit"></i>
-                </a>
-                {{ include('livre/_delete_form.html.twig') }}
+                    <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn">
+                        <i class="fa fa-book"></i>
+                    </a>
+                    <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    {{ include('livre/_delete_form.html.twig') }}
                 <div>
             </td>
         </tr>

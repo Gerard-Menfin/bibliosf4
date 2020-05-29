@@ -3,7 +3,6 @@
 {% block title %}Abonnés{% endblock %}
 
 {% block body %}
-    <h1>Liste des abonnés : {{ abonnes|length }} abonnés</h1>
-    {% include "abonne/table.html.twig" with { "abonnes": abonnes } %}
+    {% include "abonne/table.html.twig" with { "abonnes": abonnes, "table_titre":  "Liste des abonnés : " ~ abonnes|length ~ " abonnés"} %}
     <a href="{{ path('abonne_new') }}"><i class="fa fa-plus"></i> Ajouter</a>
 {% endblock %}
