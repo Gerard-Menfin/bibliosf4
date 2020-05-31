@@ -3,6 +3,38 @@
 {% block title %}Abonnés{% endblock %}
 
 {% block body %}
-    {% include "abonne/table.html.twig" with { "abonnes": abonnes, "table_titre":  "Liste des abonnés : " ~ abonnes|length ~ " abonnés"} %}
-    <a href="{{ path('abonne_new') }}"><i class="fa fa-plus"></i> Ajouter</a>
+    <div class="row">
+    <div class="col-lg-7 col-md-12">
+        {% include "abonne/table.html.twig" with { "abonnes": abonnes, "table_titre":  "Liste des abonnés : " ~ abonnes|length ~ " abonnés"} %}
+    </div>
+    <div class="col-lg-5 col-md-12">
+
+
+
+        {# <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="100%">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h1>TEST</h1>
+                            </div>
+                        </div>
+                    </th>
+                </tr>            
+                <tr>
+                    <th>Prénom</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for firstname in abonnes|column("prenom") %}
+                <tr>
+                    <td>{{ firstname }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table> #}
+    </div>
+    </div>
+
 {% endblock %}

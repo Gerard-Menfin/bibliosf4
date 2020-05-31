@@ -1,6 +1,7 @@
 {% extends "admin/formulaire.html.twig" %}
 {# this form theme will be applied only to the form of this template #}
 {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{# {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig'] only %} #}
 
 {% block titre_formulaire %}
     {{ titre_formulaire ?? "Emprunt" }}
