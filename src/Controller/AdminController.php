@@ -30,6 +30,7 @@ class AdminController extends AbstractController
         $empruntsEnCours = $er->findByNonRendus();
         $emprunts["liste"] = $emprunts;
         $emprunts["nb"] = $er->nb();
+        $emprunts["en cours"] = $empruntsEnCours;
         
         $livres["liste"] = $lr->findAll();
         $livres["nb"] = $lr->nb();
@@ -43,6 +44,11 @@ class AdminController extends AbstractController
         
         $abonnes["liste"] = $ar->findAll();
         $abonnes["nb"] = $ar->nb();
+        $abonnes["emprunteurs"] = $ar->findByLivresNonRendus();
+        $abs = $ar->findOrderedByNbEmprunts();
+        $abonnes["assidu"] = empty($abs) ? null : $abs[0];
+        $bibliophiles = $ar->findOrderedByNbLivresEmpruntes();
+        $abonnes["bibliophile"] = empty($bibliophiles) ?: $bibliophiles[0];
 
 
         return $this->render("admin/index.html.twig", compact("livres", "abonnes", "emprunts"));
