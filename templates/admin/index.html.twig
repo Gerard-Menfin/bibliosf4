@@ -22,7 +22,7 @@
                     Le plus en retard : <strong class="float-right">{{ livres.plusAncienEmprunt.abonne.prenom }}</strong>
                 </li>
                 <li class="list-group-item">
-                    Le plus présent : {{ abonnes.assidu.abonne.prenom ~  }} <strong class="float-right">x {{  abonnes.assidu.nb_emprunts }}</strong>
+                    Le plus présent : {{ abonnes.assidu.abonne.prenom  }} <strong class="float-right">x {{  abonnes.assidu.nb_emprunts }}</strong>
                 </li>
                 <li class="list-group-item">
                     Le plus bibliovore : {{ abonnes.bibliophile.abonne.prenom }}<strong class="float-right">x {{ abonnes.bibliophile.nb_livres_empruntes }}</strong>
@@ -52,7 +52,7 @@
             <h3 class="card-header">Emprunts</h3>
             <ul class="list-group">
                 <li class="list-group-item">Nombre d'emprunts : <strong class="float-right">{{ emprunts.nb }}</strong></li>
-                <li class="list-group-item">Emprunts en cours : <strong class="float-right">{{ emprunts.enCours|length }}</strong></li>
+                <li class="list-group-item">Emprunts en cours : <strong class="float-right">{{ emprunts["en cours"]|length }}</strong></li>
             </ul>
             <div class="card-footer">
                 <a class="card-link" href="{{ path("emprunt_index") }}"><i class="fa fa-list-alt"></i> Liste</a>
