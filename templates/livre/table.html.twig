@@ -1,32 +1,49 @@
-<table class="table {{ table_class is not null ? table_class : "" }}">
+{# <table class="table {{ table_class is defined ? table_class : "" }}"> #}
+{# <table class="table {{ table_class|default("") }}"> #}
+<table class="table {{ table_class ?? "" }}">
+    <colgroup>
+        <col class="col_id">
+        <col class="col_couv">
+        <col class="col_auteur">
+        <col class="col_titre">
+        <col class="col_dispo">
+        <col class="col_actions">
+    </colgroup>
+
     <thead class="thead-dark">
         {% if table_titre is not null %}
             <tr>
                 <th colspan="100%">
                     <div class="d-flex justify-content-between">
-                        <div>{{ table_titre }}</div>
+                        <div><h1>{{ table_titre }}</h1></div>
                         <a href="{{ path('livre_new') }}" class="mr-3"> 
                             <i class="fa fa-plus-square"></i>
                             Ajouter
                         </a>
                     </div>
                 </th>
-            </tr>            
+            </tr>
         {% endif %}
         <tr class="centrer">
             <th>Id</th>
-            <th>Couverture</th>
+            <th scope="col">Couverture</th>
             <th>Auteur</th>
             <th>Titre</th>
             <th>Disponible</th>
             <th>Actions</th>
         </tr>
     </thead>
+    
     <tbody>
     {% for livre in livres %}
         <tr>
             <td>{{ livre.id }}</td>
-            <td>{{ livre.couverture|img("livres", "mini")|raw }}</td>
+            <td class="text-center">
+                {% if livre.couverture is null %}
+                    <del class="fa fa-image"></del>
+                {% else %}
+                    {{ livre.couverture|img("livres", "mini")|raw }}</td>
+                {% endif %}
             <td>{{ livre.auteur }}</td>
             <td>{{ livre.titre }}</td>
             <td>
@@ -34,15 +51,15 @@
                 Non
             {% endif %}
             </td>
-            <td >
+            <td>
                 <div class="d-flex justify-content-between">
-                <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn text-primary">
-                    <i class="fa fa-book"></i>
-                </a>
-                <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn text-primary">
-                    <i class="fa fa-edit"></i>
-                </a>
-                {{ include('livre/_delete_form.html.twig') }}
+                    <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn">
+                        <i class="fa fa-book"></i>
+                    </a>
+                    <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    {{ include('livre/_delete_form.html.twig') }}
                 <div>
             </td>
         </tr>

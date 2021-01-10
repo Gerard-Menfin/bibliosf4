@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends is_granted("ROLE_BIBLIOTHECAIRE") ? "base_admin.html.twig" : "base.html.twig" %}
 
 {% block title %}Fiche Livre{% endblock %}
 
@@ -36,7 +36,7 @@
                 <i  class="fa fa-edit"></i>
                 Modifier
             </a>
-            {{ include('livre/_delete_form.html.twig') }}
+            {% include 'livre/_delete_form.html.twig' with { "texte": true } %}
         </div>
 
 

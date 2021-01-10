@@ -11,21 +11,15 @@
     <body>
         {# MENU #}
         {% block nav %}
-            {% include "menu.html.twig" %}
+            {% include"nav.html.twig" %}
         {% endblock %}
 
         {# MESSAGES #}
-        {% for type, messages in app.flashes %}
-        <div class="alert alert-{{ type }}">
-            {% for message in messages %}
-                {{ message|raw }}
-            {% endfor %}
-        </div>
-        {% endfor %}
+        {% include "message.html.twig" %}
 
-        <div class="container pt-2">
+        <div class="container pt-2 mt-4">
             {% block body %}
-                <h1>Bienvenue à la bibliothèque</h1>
+                <h1>{% block h1 %}Bienvenue à la bibliothèque{% endblock %}</h1>
                 
                 {% block formulaire %}{% endblock %}
                 
@@ -46,8 +40,8 @@
         </div>
         {% include "footer.html.twig" %}
 
+        {{ encore_entry_script_tags("app") }}
         {% block javascripts %}
-            {{ encore_entry_script_tags("app") }}
         {% endblock %}
     </body>
 </html>

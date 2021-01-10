@@ -1,0 +1,143 @@
+<nav class="nav navbar-expand flex-md-column navbar-dark bg-dark flex-row align-items-start">
+	<div class="collapse navbar-collapse">
+		<ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+			<li class="nav-item {{ app.request.pathinfo == path("gestion") ? " active" : " " }}">
+				<a class="nav-link" href="{{ path("gestion") }}">GESTION</a>
+			</li>
+
+			<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+				<a class="nav-link {{ app.request.pathinfo == path("abonne_index") ? " active" : " " }}" href="{{ path("abonne_index") }}">
+					Abonnés
+				</a>
+				<ul>
+					<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+						<a class="nav-link {{ app.request.pathinfo == path("abonne_index") ? " active" : " " }}" href="{{ path("abonne_index") }}">
+							<i class="fa fa-list-alt"></i>
+							Liste
+						</a>
+					</li>
+					<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+						<a class="nav-link {{ app.request.pathinfo == path("abonne_new") ? " active" : " " }}" href="{{ path("abonne_new") }}">
+							<i class="fa fa-plus-square"></i>
+							Ajouter
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			</li>
+			<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+				<a class="nav-link {{ app.request.pathinfo == path("livre_index") ? " active" : " " }}" href="{{ path("livre_index") }}">
+					Livres
+				</a>
+				<ul>
+					<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+						<a class="nav-link {{ app.request.pathinfo == path("livre_index") ? " active" : " " }}" href="{{ path("livre_index") }}">
+							<i class="fa fa-list-alt"></i>
+							Liste
+						</a>
+					</li>
+					<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+						<a class="nav-link {{ app.request.pathinfo == path("livre_new") ? " active" : " " }}" href="{{ path("livre_new") }}">
+							<i class="fa fa-plus-square"></i>
+							Ajouter
+						</a>
+					</li>
+				</ul>
+			</li>
+			</li>
+			<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+				<a class="nav-link {{ app.request.pathinfo == path("emprunt_index") ? " active" : " " }}" href="{{ path("emprunt_index") }}">
+					Emprunts
+				</a>
+				<ul>
+					<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+						<a class="nav-link {{ app.request.pathinfo == path("emprunt_index") ? " active" : " " }}" href="{{ path("emprunt_index") }}">
+							<i class="fa fa-list-alt"></i>
+							Liste
+						</a>
+					</li>
+					<li class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+						<a class="nav-link {{ app.request.pathinfo == path("emprunt_new") ? " active" : " " }}" href="{{ path("emprunt_new") }}">
+							<i class="fa fa-plus-square"></i>
+							Ajouter
+						</a>
+					</li>
+				</ul>
+			</li>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link">
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path("app_logout") }}">
+					<i class="fa fa-sign-out-alt"></i> Déconnexion
+				</a>
+			</li>
+
+		</ul>
+	</div>
+</nav>
+
+{# 
+		<nav class="navbar navbar-expand-lgmb-4">
+		  <a class="navbar-brand" href="{{ path("accueil") }}">Biblio</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      {% if is_granted("ROLE_ADMIN") %}
+		  
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ path("abonne_index") }}"> </a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ path("livre_index") }}"></a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ path("emprunt_index") }}"></a>
+		        </li>
+		
+		      {% endif %}
+		
+		      {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+		
+		        <li class="nav-item ">
+		          <a class="nav-link" href="{{ path("profil") }}">{{ app.user.username }}</a>
+		        </li>
+		
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ path("app_logout") }}">
+		            <i class="fa fa-sign-out-alt"></i>
+		          </a>
+		        </li>
+		
+		      {% else %}
+		
+		        <li class="nav-item {{ app.request.pathinfo == path("app_login") ? "active" : "" }}">
+		          <a class="nav-link" href="{{ path("app_login") }}">
+		            <i class="fa fa-sign-in-alt"></i>
+		          </a>
+		        </li>
+		
+		        <li class="nav-item {{ app.request.pathinfo == path("app_register") ? "active" : "" }}">
+		          <a class="nav-link" href="{{ path("app_register") }}">
+		            <i class="fa fa-door-open"></i>
+		            
+		          </a>
+		        </li>
+		
+		      {% endif %}
+		    </ul>
+		
+		    <form class="form-inline my-2 my-lg-0" action="{{ path("recherche") }}">
+		      <input class="form-control mr-sm-2" name="mot_recherche" type="search" placeholder="Search" aria-label="Search">
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+		    </form>
+		  </div>
+		</nav>
+		 #}

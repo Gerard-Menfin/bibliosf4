@@ -1,13 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
-{% block title %}Edit Emprunt{% endblock %}
+{% block title %}Modifer Emprunt{% endblock %}
 
 {% block body %}
-    <h1>Edit Emprunt</h1>
 
-    {{ include('emprunt/_form.html.twig', {'button_label': 'Update'}) }}
+    {% block formulaire %}
+        {{ include('emprunt/_form.html.twig', {'button_label': 'Update', "titre_formulaire": "Modifier l'emprunt n°" ~ emprunt.id}) }}
+    {% endblock %}
 
-    <a href="{{ path('emprunt_index') }}">back to list</a>
+    <div class="d-flex justify-content-between bg-secondary mt-5">
+        <a href="{{ path('emprunt_index') }}" class="btn text-primary">
+            <i class="fa fa-reply"></i>
+            Retour
+        </a>
 
-    {{ include('emprunt/_delete_form.html.twig') }}
+        {% include 'emprunt/_delete_form.html.twig' with { "emprunt": form.vars.value, "texte": true } %}
+    </div>
+
 {% endblock %}

@@ -1,20 +1,32 @@
-    <table class="table">
-        <thead>
-            <tr>
+    <table class="table {{ table_class ?? "" }}">
+        <thead class="thead-dark">
+             <tr>
+                <th colspan="100%">
+                    <div class="d-flex justify-content-between">
+                        <div><h1>Emprunts</h1></div>
+                        <a href="{{ path('emprunt_new') }}" class="mr-3"> 
+                            <i class="fa fa-plus-square"></i>
+                            Ajouter
+                        </a>
+                    </div>
+                </th>
+            </tr>            
+           <tr class="center">
                 <th>Id</th>
                 <th>Abonné</th>
                 <th>Livre</th>
-                <th>Date_sortie</th>
-                <th>Date_rendu</th>
+                <th>Emprunté le</th>
+                <th>Rendu le</th>
                 <th>Actions</th>
             </tr>
         </thead>
+
         <tbody>
         {% for emprunt in emprunts %}
             <tr>
-            {# 
-            afficher le prénom de l'abonné dans un td, puis dans un autre td
-              le titre du livre suivi de l'auteur, pour chaque emprunt
+            {#  
+                afficher le prénom de l'abonné dans un td, puis dans un autre td
+                le titre du livre suivi de l'auteur, pour chaque emprunt
              #}
                 <td>{{ emprunt.id }}</td>
                 <td>{{ emprunt.abonne.prenom }}</td>
@@ -22,8 +34,15 @@
                 <td>{{ emprunt.dateSortie ? emprunt.dateSortie|date('d/m/Y') : '' }}</td>
                 <td>{{ emprunt.dateRendu ? emprunt.dateRendu|date('d/m/Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('emprunt_show', {'id': emprunt.id}) }}">show</a>
-                    <a href="{{ path('emprunt_edit', {'id': emprunt.id}) }}">edit</a>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ path('emprunt_show', {'id': emprunt.id}) }}" class="btn">
+                            <i class="fa fa-book-reader"></i>
+                        </a>
+                        <a href="{{ path('emprunt_edit', {'id': emprunt.id}) }}" class="btn">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        {{ include('emprunt/_delete_form.html.twig') }}
+                    </div>
                 </td>
             </tr>
         {% else %}

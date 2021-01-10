@@ -24,9 +24,9 @@ class LivreController extends AbstractController
     {
 
         return $this->render('livre/index.html.twig', [
-            'livres' => $lr->findAll(),
-            // 'empruntsNull' => $er->findByNonRendus(),
+            'livres' => $lr->findAll(["auteur" => "ASC", "titre" => "ASC"]),
             'livres_empruntes' => $lr->findByEmpruntes()
+            // 'empruntsNull' => $er->findByNonRendus(),
         ]);
     }
 
@@ -61,6 +61,9 @@ class LivreController extends AbstractController
         }
 
         $form = $formLivre->createView();
+
+        // j'ajoute une propriété à l'objet $form pour passer
+        // des paramètres supplémentaires à la vue
         $form->options["titre_formulaire"] = "Ajouter un livre";
         return $this->render('livre/new.html.twig', [
             'livre' => $nouveauLivre,
@@ -104,7 +107,7 @@ class LivreController extends AbstractController
         $formLivre = $formLivre->createView();
         $formLivre->options["titre_formulaire"] = "Modifier le livre n°" . $livre->getId();
         return $this->render('livre/edit.html.twig', [
-            'livre' => $livre,
+            // 'livre' => $livre,
             'form' => $formLivre//->createView(),
         ]);
     }

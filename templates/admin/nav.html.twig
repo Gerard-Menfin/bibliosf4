@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+
+			<a class="navbar-brand" href="{{ path("accueil") }}">BIBLIOS</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path("app_logout") }}">
+					<i class="fa fa-sign-out-alt"></i> Déconnexion
+				</a>
+			</li>
+
+			{% if is_granted("ROLE_DEV") and nombdd is defined %}
+				<li class="nav-iem text-white">
+					<a class="nav-link">
+						BDD : {{ nombdd }}
+					</a>
+				</li>
+			{% endif %}
+		</ul>
+
+		<form class="form-inline my-2 my-lg-0" action="{{ path("recherche") }}">
+			<input class="form-control mr-sm-2" name="mot_recherche" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+		</form>
+	</div>
+</nav>

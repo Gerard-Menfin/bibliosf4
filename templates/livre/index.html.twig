@@ -1,19 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Livres{% endblock %}
 
-{% block body %}
-    <h1 class="d-flex justify-content-between">
-        Liste des Livres
-    </h1>
 
+{% block body %}
     {% set lien = "" %}
     <div class="row">
         <div class="col-lg-7 col-md-12">
             {% include "livre/table.html.twig" with {
                 "livres": livres, 
                 "livres_empruntes": livres_empruntes, 
-                "table_class": "table-responsive",
                 "table_titre": "Catalogue : " ~ livres|length ~ " livres"
               } 
             %}
@@ -23,12 +19,11 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th colspan="100%" class="centrer">Livres non rendus</th>
+                        <th colspan="100%" class="centrer"><h1>Livres non rendus</h1></th>
                     </tr>
                     <tr>
-                        <th>ID</th>
-                        <th>Titre</th>
-                        <th>Date Emprunt</th>
+                        <th>Livre</th>
+                        <th>Emprunté le</th>
                     </tr>
                 </thead>
 
@@ -38,9 +33,9 @@
                         {# déclarer et affecter une variable #}
                         {% set nb = livre.emprunts|length - 1 %}
                         <tr>
-                            <td>{{ livre.id }}</td>
                             <td>{{ livre.titre ~ " - " ~ livre.auteur }}</td>
                             <td>{{ livre.emprunts[nb].dateSortie|date("d/m/y") }}</td>
+                            {# <td>{{ livre.emprunts|last.dateSortie|date("d/m/y") }}</td> #}
                         <tr>
                     {% endfor %}
                 </tbody>

@@ -1,4 +1,34 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
+{% extends "admin/formulaire.html.twig" %}
+
+{% block titre_formulaire %}
+    {% set abonne = form.vars.value %}
+    {% if abonne.id is null %}
+        Ajouter un abonné
+    {% else %}
+        Modifier l'abonné n°{{ abonne.id }}
+    {% endif %}
+    
+{% endblock %}
+
+
+{% block formulaire %}
+    
+    {{ form_start(form) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.roles) }}
+        {{ form_row(form.password) }}
+
+        <div class="d-flex justify-content-between mt-5">
+            {# <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button> #}
+            {{ form_row(form.enregistrer) }}
+            <a href="{{ path("abonne_index") }}" class="btn btn-warning form-group">
+                <i class="fa fa-reply"></i> Annuler
+            </a>
+        </div>
+    {{ form_end(form) }}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags("form") }}
+{% endblock %}

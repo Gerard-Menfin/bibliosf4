@@ -1,0 +1,15 @@
+{% set obj = form.vars.value %} {# récupère l'objet envoyé comme paramètre dans la méthode createForm #}
+
+<div class="formulaire">
+
+    <h1 class="bg-secondary mb-4">{% block titre_formulaire %}{% endblock %}</h1>
+
+    {% block formulaire %}{% endblock %}
+</div>
+
+
+{#
+ # le block javascripts ne peut pas être dans la vue _form qui hérite de cette vue 
+ #  si cette vue n'a pas elle-même un block javascripts
+ #}
+{% block javascripts %}{% endblock %}

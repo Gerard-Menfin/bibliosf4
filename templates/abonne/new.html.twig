@@ -1,14 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Nouvel Abonné{% endblock %}
 
 {% block body %}
-    <h1>Créer un nouvel abonné</h1>
 
     {{ include('abonne/_form.html.twig') }}
 
-    <a href="{{ path('abonne_index') }}">
-        <i class="fa fa-reply"></i>
-        Retour à la liste
-    </a>
 {% endblock %}

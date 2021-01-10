@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Affichage{% endblock %} | Biblio</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags("device") }}
+        {% endblock %}
+    </head>
+
+    <body>
+        {# MENU #}
+        {% block nav %}
+            {% include"nav.html.twig" %}
+        {% endblock %}
+
+        {# MESSAGES #}
+        {% include "message.html.twig" %}
+        
+        {% block body %}
+            <div class="smartphone">
+                <div class="content">
+                    <iframe src="{{ path("accueil") }}" style="width:100%;border:none;height:100%">
+                </div>
+            </div>
+        {% endblock %}
+
+
+        {% include "footer.html.twig" %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags("device") }}
+        {% endblock %}
+    </body>
+</html>

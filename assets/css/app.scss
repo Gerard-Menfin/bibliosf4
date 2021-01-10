@@ -4,14 +4,17 @@ $theme-colors: (
   "primary": #6600ff,
   "secondary": #b9b8c6,
   "success": #a366ff,
-  "danger": #ad131f,
+  "danger": #81161f,
   "warning": #bf7a0b,
   "info": #0ba1bf,
   "light": #F8F9FA,
   "dark": #343A40
 );
+$secondary: #b9b8c6;
+$hauteur_footer: 60px;
 
 @import '~bootstrap/scss/bootstrap';
+
 
 body {
     background-image: url("/images/bibpublique_stokholm.png");
@@ -31,17 +34,25 @@ img.vignette{
     height: 100px;
 }
 
+// FOOTER
 // Pour avoir un footer en bas de page
 html {
     position: relative;
     min-height: 100%;
 }
+
+body{
+    // height: calc(100vh - #{$hauteur_footer});  // pour utiliser une variable SASS dans la fonction CSS calc
+    height: 100%;
+
+}
  
 .footer {
     position: absolute;
-    bottom: 0;
+    bottom: -$hauteur_footer; // <> bottom: 0   =>   pour éviter de cacher le bas de la page
+    // bottom: 0;
     width: 100%;
-    height: 60px;
+    height: $hauteur_footer;
     background: #000000;
     color: #FFFFFF;
 }
@@ -50,7 +61,7 @@ html {
 div.formulaire {
     background-color: $light;
     color: color-yiq(#e6def1);
-    padding: $spacer * .5;
+    padding: $spacer;
     margin-top: $spacer;
 }
 form label{
@@ -75,3 +86,24 @@ table.rayon{
     background-image: url("/images/natural-wood-grain-background.jpg");
 }
 
+del{
+    border: 1px solid $danger;
+}
+
+// CARD
+h4.card-header{
+    // pour afficher le titre sur 1 ligne et afficher le caractère ... 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// CARD vignette livre
+.card.livre{
+    min-height: 160px;
+    box-shadow: 0 0 10px black;
+}
+
+.livre > .couverture{
+    height: 160px !important;
+}

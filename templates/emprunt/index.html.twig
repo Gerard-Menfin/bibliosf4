@@ -1,12 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Emprunts{% endblock %}
 
 {% block body %}
-    <h1>Liste des Emprunts</h1>
-
     {% include "emprunt/table.html.twig" with {"emprunts": emprunts} %}
     <a href="{{ path('emprunt_new') }}">Nouvel emprunt</a>
-
-    
 {% endblock %}

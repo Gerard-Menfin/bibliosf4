@@ -34,5 +34,15 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/(abonne|livre|emprunt)/, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: (ajouter|modifier)$, roles: ROLE_BIBLIOTHECAIRE }
+        - { path: supprimer$, roles: ROLE_ADMIN }
+        - { path: ^/test, roles: ROLE_DEV }
+        # - { path: ^/profil, roles: ROLE_USER }
+    
+    role_hierarchy:
+        # ROLE_BIBLIOTHECAIRE: ROLE_USER
+        ROLE_ADMIN: ROLE_BIBLIOTHECAIRE
+        ROLE_DEV: ROLE_ADMIN, ROLE_USER
+
+    # Redirection Access Denied (error 403)
+    access_denied_url: /

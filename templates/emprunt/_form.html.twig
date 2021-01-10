@@ -1,4 +1,25 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% extends "admin/formulaire.html.twig" %}
+{# this form theme will be applied only to the form of this template #}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{# {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig'] only %} #}
+
+{% block titre_formulaire %}
+    {{ titre_formulaire ?? "Emprunt" }}
+{% endblock %}
+
+{% block formulaire %}
+    
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="d-flex justify-content-between mt-5">
+            <div class="form-group">
+                <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+            </div>
+            <a href="{{ path('emprunt_index') }}" class="btn btn-warning form-group">
+                <i class="fa fa-reply"></i>
+                Annuler
+            </a>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

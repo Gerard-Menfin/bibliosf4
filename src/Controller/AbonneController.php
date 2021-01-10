@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface as Password;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Doctrine\ORM\EntityManagerInterface as EntityManager;
-use App\Form\FormLivreType;
 
 /**
  * @Route("/abonne")
@@ -29,7 +27,7 @@ class AbonneController extends AbstractController
     public function index(AbonneRepository $abonneRepository): Response
     {
         return $this->render('abonne/index.html.twig', [
-            'abonnes' => $abonneRepository->findAll(),
+            'abonnes' => $abonneRepository->findAll(["roles" => "ASC", "prenom" => "ASC"]),
         ]);
     }
 

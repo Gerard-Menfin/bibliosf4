@@ -98,11 +98,11 @@ class LoginFormAuthAuthenticator extends AbstractFormLoginAuthenticator implemen
             return new RedirectResponse($targetPath);
         }
 
-        if($this->security->isGranted("ROLE_ADMIN")){
-            return new RedirectResponse($this->urlGenerator->generate('gestion'));           
-        } else {
-            return new RedirectResponse($this->urlGenerator->generate('accueil'));
+        $route = "accueil";
+        if($this->security->isGranted("ROLE_BIBLIOTHECAIRE")){
+            $route = "gestion";
         }
+        return new RedirectResponse($this->urlGenerator->generate($route));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

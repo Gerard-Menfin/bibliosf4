@@ -21,7 +21,7 @@ class EmpruntController extends AbstractController
     public function index(EmpruntRepository $empruntRepository): Response
     {
         return $this->render('emprunt/index.html.twig', [
-            'emprunts' => $empruntRepository->findAll(),
+            'emprunts' => $empruntRepository->findAll(["date_rendu" => "ASC", "date_sortie" => "ASC"]),
         ]);
     }
 

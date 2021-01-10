@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Modifier livre{% endblock %}
 
@@ -8,12 +8,12 @@
         {{ include('livre/_form.html.twig') }}
     {% endblock %}
 
-    <div class="d-flex justify-content-around">
-        <a href="{{ path('livre_index') }}">
+    <div class="d-flex justify-content-between bg-secondary mt-5">
+        <a href="{{ path('livre_index') }}" class="btn text-primary">
             <i class="fa fa-reply"></i>
             Retour
         </a>
 
-        {{ include('livre/_delete_form.html.twig') }}
+        {% include 'livre/_delete_form.html.twig' with { "livre": form.vars.value, "texte": true } %}
     </div>
 {% endblock %}

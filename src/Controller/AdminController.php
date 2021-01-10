@@ -23,15 +23,36 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/gestion", name="gestion")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_BIBLIOTHECAIRE")
      */
     public function gestion(LivreRepository $lr, EmpruntRepository $er, AbonneRepository $ar){
-        $nb_abonnes = $ar->nb();
-        $nb_livres = $lr->nb();
-        $nb_emprunts = $er->nb();
+        $emprunts = $er->findAll(["date_rendu" => "ASC", "date_sortie" => "ASC"]);
+        $empruntsEnCours = $er->findByNonRendus();
+        $emprunts["liste"] = $emprunts;
+        $emprunts["nb"] = $er->nb();
+        $emprunts["en cours"] = $empruntsEnCours;
+        
+        $livres["liste"] = $lr->findAll();
+        $livres["nb"] = $lr->nb();
+        $livres["nbSortis"] = $lr->nbSortis();
+        $livres["nbDisponibles"] = $lr->nbDisponibles();
+        $livres["plusAncienEmprunt"] = count($empruntsEnCours) ? $empruntsEnCours[0] : null;
+        $livres_empruntes = $lr->lesPlusEmpruntes();
         // $livres_empruntes = array_splice($livres_empruntes, 0, 5);
+        $livres["plusEmprunte"] = $livres_empruntes[0];
+        $livres["moinsEmprunte"] = end($livres_empruntes);
+        
+        $abonnes["liste"] = $ar->findAll();
+        $abonnes["nb"] = $ar->nb();
+        $abonnes["emprunteurs"] = $ar->findByLivresNonRendus();
+        $abs = $ar->findOrderedByNbEmprunts();
+        $abonnes["assidu"] = empty($abs) ? null : $abs[0];
+        $bibliophiles = $ar->findOrderedByNbLivresEmpruntes();
+        $abonnes["bibliophile"] = empty($bibliophiles) ?: $bibliophiles[0];
 
-        return $this->render("admin/index.html.twig", compact("nb_abonnes", "nb_livres", "nb_emprunts"));
+        $nombdd = $lr->nomBDD();
+
+        return $this->render("admin/index.html.twig", compact("livres", "abonnes", "emprunts", "nombdd"));
     }
 
 }
