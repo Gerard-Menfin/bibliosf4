@@ -37,7 +37,7 @@ security:
         - { path: (ajouter|modifier)$, roles: ROLE_BIBLIOTHECAIRE }
         - { path: supprimer$, roles: ROLE_ADMIN }
         - { path: ^/test, roles: ROLE_DEV }
-        - { path: ^/profil, roles: ROLE_USER }
+        # - { path: ^/profil, roles: ROLE_USER }
     
     role_hierarchy:
         # ROLE_BIBLIOTHECAIRE: ROLE_USER

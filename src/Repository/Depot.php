@@ -40,7 +40,12 @@ abstract class Depot extends ServiceEntityRepository
         return $this->findBy([], $orderBy);
     }
 
-
+    /**
+     * Le nom de la BDD actuellement utilisée
+     */
+    public function nomBDD(){
+        return $this->getEntityManager()->getConnection()->getDatabase();
+    }
 
 
     // /**

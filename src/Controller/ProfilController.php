@@ -77,40 +77,6 @@ class ProfilController extends AbstractController
         return $this->render("abonne/reservation.html.twig", compact("livresRendus"));
     }
 
-    /**
-     * @Route("/profil/ajouter-livre", name="livre_ajouter", methods={"GET", "POST"})
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
-     */
-    public function ajouter(LivreRepository $lr, EntityManager $em, Request $rq){
-        $nouveauLivre = new Livre;
-        $formAjouter = $this->createForm(FormLivreType::class, $nouveauLivre);
-        $formAjouter->handleRequest($rq);
-        if($formAjouter->isSubmitted()) {
-            if($formAjouter->isValid() ) {
-                $fichier = $formAjouter->get("couverture")->getData();
-                if($fichier){
-                    $nomFichier = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
-                    $nomFichier .= uniqid();
-                    $nomFichier .= "." . $fichier->guessExtension();
-                    $nomFichier = str_replace(" ", "_", $nomFichier);
-                    // on enregistre le fichier téléchargé dans le dossier des images pour les couvertures de livre
-                    $dossier  = $this->getParameter("dossier_images") . "livres";
-                    $fichier->move($dossier, $nomFichier);
-                    $nouveauLivre->setCouverture($nomFichier);
-                }
-
-                $em->persist($nouveauLivre);
-                $em->flush();
-                $this->addFlash("success", "Nouveau livre : <i>" . $nouveauLivre->getTitre() .  "</i> ajouté");
-                return $this->redirectToRoute("accueil");
-            } else{
-                $this->addFlash("danger", "Le formulaire n'est pas valide");
-            }
-        }
-
-        $formAjouter = $formAjouter->createView();
-        return $this->render("livre/form_ajouter.html.twig", compact("formAjouter"));
-    }
 
 
 }

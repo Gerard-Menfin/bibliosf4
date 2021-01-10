@@ -14,42 +14,36 @@
     <h1>Profil</h1>
 
     <div class="card">
-        <div class="card-body">
+        <div class="card-header">
             <h4 class="card-title">Prénom : {{ app.user.username }}</h4>
         </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Livre</th>
+                        <th>Emprunté le</th>
+                        <th>Rendu le</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for emprunt in app.user.emprunts %}
+                    <tr>
+                        <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
+                        <td>{{ emprunt.dateSortie ? emprunt.dateSortie|date('d/m/Y') : '' }}</td>
+                        <td>{{ emprunt.dateRendu ? emprunt.dateRendu|date('d/m/Y') : 'à rendre' }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Vous n'avez emprunté aucun livre</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path("reserver") }}" class="card-link">
+                <i class="fa fa-plus"></i>Emprunter des livres
+            </a>
+        </div>
     </div>
-
-    <div>
-        <a href="{{ path("reserver") }}">Emprunter des livres</a>
-        <a href="{{ path("livre_ajouter") }}">
-            <i class="fa fa-plus"></i>
-            Ajouter un livre
-        </a>
-    </div>
-
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Livre</th>
-                <th>Emprunté le</th>
-                <th>Rendu le</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for emprunt in app.user.emprunts %}
-            <tr>
-                <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
-                <td>{{ emprunt.dateSortie ? emprunt.dateSortie|date('d/m/Y') : '' }}</td>
-                <td>{{ emprunt.dateRendu ? emprunt.dateRendu|date('d/m/Y') : 'à rendre' }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Vous n'avez emprunté aucun livre</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-
 
 {% endblock %}

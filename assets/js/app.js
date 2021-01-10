@@ -57,7 +57,7 @@ $(function(){
     $("table").addClass("table");
     
     // forms
-    $("[type='file']").change(function(){
+    $("[type='file']").on("change", function(){
         readURL(this);
         var fileName = $(this).val();
         //replace the "Choose a file" label

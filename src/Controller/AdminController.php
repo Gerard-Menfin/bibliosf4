@@ -50,8 +50,9 @@ class AdminController extends AbstractController
         $bibliophiles = $ar->findOrderedByNbLivresEmpruntes();
         $abonnes["bibliophile"] = empty($bibliophiles) ?: $bibliophiles[0];
 
+        $nombdd = $lr->nomBDD();
 
-        return $this->render("admin/index.html.twig", compact("livres", "abonnes", "emprunts"));
+        return $this->render("admin/index.html.twig", compact("livres", "abonnes", "emprunts", "nombdd"));
     }
 
 }
