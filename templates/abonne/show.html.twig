@@ -17,7 +17,21 @@
             </tr>
             <tr>
                 <th>Niveau</th>
-                <td>{{ abonne.roles ? abonne.roles|json_encode : '' }}</td>
+                <td>{{ abonne.roles ? abonne.roles|json_encode : '' }}
+                    {% for niveau in abonne.roles %}
+                        {% if niveau == "ROLE_ADMIN" %}
+                            Directeur
+                        {% elseif niveau == "ROLE_BIBLIOTHECAIRE" %}
+                            Bibliothécaire
+                        {% elseif niveau == "ROLE_USER" %}
+                            Abonné
+                        {% elseif niveau == "ROLE_LECTEUR" %}
+                            Lecteur
+                        {% else %}
+                            Autre
+                        {% endif %}
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
                 <th>Mot de passe</th>
