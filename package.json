@@ -21,7 +21,7 @@
         "bootstrap": "^4.4.1",
         "jQuery": "^1.7.4",
         "jquery": "^3.5.0",
-        "jsdom": "^16.2.2",
+        "jsdom": "^16.5.0",
         "location": "0.0.1",
         "minimist": "1.2.3",
         "navigator": "^1.0.1",
